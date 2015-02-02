@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,7 +44,7 @@ public class CompetenceProfile implements Serializable {
     @ManyToOne
     private Person personId;
     @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
-    @OneToOne
+    @ManyToOne
     private Competence competenceId;
 
     public CompetenceProfile() {
