@@ -184,7 +184,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "se.kth.Person[ personId=" + personId + " ]";
+        return "se.kth.model.Person[ personId=" + personId + " ]";
     }
     
 }

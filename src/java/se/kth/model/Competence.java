@@ -95,7 +95,7 @@ public class Competence implements Serializable {
 
     @Override
     public String toString() {
-        return "se.kth.Competence[ competenceId=" + competenceId + " ]";
+        return "se.kth.model.Competence[ competenceId=" + competenceId + " ]";
     }
     
 }

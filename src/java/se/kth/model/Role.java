@@ -110,7 +110,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "se.kth.Role[ roleId=" + roleId + " ]";
+        return "se.kth.model.Role[ roleId=" + roleId + " ]";
     }
     
 }
