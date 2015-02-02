@@ -109,7 +109,7 @@ public class CompetenceProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "se.kth.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";
+        return "se.kth.model.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";
     }
     
 }

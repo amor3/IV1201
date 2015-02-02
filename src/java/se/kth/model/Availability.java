@@ -110,7 +110,7 @@ public class Availability implements Serializable {
 
     @Override
     public String toString() {
-        return "se.kth.Availability[ availabilityId=" + availabilityId + " ]";
+        return "se.kth.model.Availability[ availabilityId=" + availabilityId + " ]";
     }
     
 }
