@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<root>
+    
+    <!-- This is the configuration built 2015.02.03 -->
+    
+    <auth-realm classname="com.sun.enterprise.security.ee.auth.realm.jdbc.JDBCRealm" name="jdbc_realm">
+        <property name="jaas-context" value="JDBCRealm"></property>
+        <property name="password-column" value="password"></property>
+        <property name="datasource-jndi" value="jdbc/RDB"></property>
+        <property name="group-table" value="group"></property>
+        <property name="user-table" value="person"></property>
+        <property name="group-name-column" value="role"></property>
+        <property name="digestrealm-password-enc-algorithm" value="SHA-256"></property>
+        <property name="group-table-user-name-column" value="person"></property>
+        <property name="user-name-column" value="email"></property>
+    </auth-realm>
+        
+        
+    
+</root>
