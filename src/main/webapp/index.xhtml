@@ -9,41 +9,126 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>Välkommen till Blåa lund</title>
+
+                <!-- Latest compiled and minified CSS -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+
+                <!-- Optional theme -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+
+                <link href="css/styles.css" rel="stylesheet" />
+
+
             </f:facet>
         </h:head>
 
         <h:body>
+            <!-- navigation view -->
+            <ui:include src="nav.xhtml"></ui:include>
 
-            <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
 
-                        </p:submenu>
 
-                    </p:menu>
-                </p:layoutUnit>
+            <section class="container-fluid" id="section1">
+                <h1 class="text-center v-center">Vi har världens bästa attraktioner!</h1>
 
-                <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
-                </p:layoutUnit>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-2 text-center">
+                                    <h3>Säkra</h3>
+                                    <p>There is other content and snippets of details or features that can be placed here..</p>
+                                    <i class="fa fa-cog fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="row">
+                                <div class="col-sm-10 col-sm-offset-1 text-center">
+                                    <h3>Roliga</h3>
+                                    <p>You may also want to create content that compells users to scroll down more..</p>
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <div class="row">
+                                <div class="col-sm-10 text-center">
+                                    <h3>Farligt barnsliga</h3>
+                                    <p>In the first 30 seconds of a user's visit to your site they decide if they're going to stay..</p>
+                                    <i class="fa fa-mobile fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/row-->
+                    <div class="row"><br/></div>
+                </div><!--/container-->
+            </section>
 
-            </p:layout>
 
+
+
+
+
+
+
+
+
+
+
+            <section class="container-fluid" id="section2">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text-center">
+                        <h1>What is Bootstrap?</h1>
+                        <br/>
+                        <p class="lead">Bootstrap is a free collection of tools for creating websites and web applications. It contains HTML and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. It is the No.1 project on GitHub with 65,000+ stars and 23,800 forks (as of March 2014) [1] and has been used by NASA and MSNBC, among many others..</p>
+                        <br/> 
+                        <i style="font-size:120px" class="fa fa-camera fa-5x"></i>
+                        <p>Big 'ol Camera Icon</p>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section class="container-fluid" id="section3">
+                <h1 class="text-center">Bootstrap is Responsive</h1>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <h3 class="text-center">Vertical scrolling has become a popular and lasting trend in Web design.</h3>
+                        <div class="row">
+                            <div class="col-xs-4 col-xs-offset-1">Some brand-tacular designs even have home page content that is taller that 12,000 pixels. That's a lotta content.</div>
+                            <div class="col-xs-2"></div>
+                            <div class="col-xs-4 text-right">Anyhoo, this is just some random blurb of text, and Bootply.com is a playground and code editor for Bootstrap.</div>
+                        </div>
+                        <p class="text-center">
+                            <img src="/assets/example/img_mtnpeople.png" class="img-responsive center-block " />
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+
+
+            <!-- Script Libs -->
+            <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+
+            <script src="js/scripts.js"></script>
         </h:body>
 
     </f:view>
