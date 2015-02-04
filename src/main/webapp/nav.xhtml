@@ -19,7 +19,7 @@
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
                 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-                
+
             </f:facet>
         </h:head>
 
@@ -39,18 +39,30 @@
                         </div>
                         <div class="navbar-collapse collapse pull-right" id="navbar-collapsible">
                             <ul class="nav navbar-nav navbar-left">
-                                <li><a href="#section1">Hem</a></li>
-                                <li><a href="#section2">Attraktioner</a></li>
-                                <li><a href="#section3">Om oss</a></li>
-                                <li><a href="#section4">Vår historia</a></li>
-                                <li><a href="#section5">Kontakt</a></li>
-                                <li><a href="login.xhtml">Arbeta hos oss <i class="fa fa-thumbs-up"></i></a></li>
-                                
-                                <li style="padding-left: 30px;"><a href="#SWE"> <img class="img-circle" src="img/swe_flag.png" /></a></li>
-                                <li><a style="padding-left:0px;" href="#ENG"> <img class="img-circle" src="img/uk_flag.png" /></a></li>
+                                <li><a href="#section1">#{messages.home}</a></li>
+                                <li><a href="#section2">#{messages.attractions}</a></li>
+                                <li><a href="#section3">#{messages.contact}</a></li>
+                                <li><a href="#section4">#{messages.about}</a></li>
+                                <li><a href="#section5">#{messages.ourHistory}</a></li>
+                                <li><a href="login.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
+
+                                <li style="padding-top: 18px; padding-left: 18px;">
+                                <h:form>
+                                    <h:commandLink action="#{languageManager.changeLanguage()}">
+                                        <f:param name="languageCode" value="sv"/>
+                                        <h:graphicImage class="img-circle" value="img/swe_flag.png"/>
+                                    </h:commandLink>
+                                    &nbsp;
+                                    <h:commandLink action="#{languageManager.changeLanguage()}">
+                                        <f:param name="languageCode" value="en"/>
+                                        <h:graphicImage class="img-circle" value="img/uk_flag.png"/>
+                                    </h:commandLink>
+                                </h:form>
+                                </li>
+
                                 <li>&nbsp;</li>
                             </ul>
-                            
+
                         </div>
                     </div>
                 </nav>
