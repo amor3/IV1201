@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,12 +19,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AMore
+ * @author work
  */
 @Entity
 @Table(name = "competence_profile")
@@ -31,22 +32,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompetenceProfile.findAll", query = "SELECT c FROM CompetenceProfile c"),
     @NamedQuery(name = "CompetenceProfile.findByCompetenceProfileId", query = "SELECT c FROM CompetenceProfile c WHERE c.competenceProfileId = :competenceProfileId"),
     @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
-public class CompetenceProfile implements Serializable {
+public class CompetenceProfile implements Serializable, CompetenceInterface {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "competence_profile_id")
     private Long competenceProfileId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "years_of_experience")
     private BigDecimal yearsOfExperience;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-    @ManyToOne
-    private Person personId;
     @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
     @OneToOne
     private Competence competenceId;
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
+    @ManyToOne
+    private Person personId;
 
     public CompetenceProfile() {
     }
@@ -63,6 +64,7 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
+    @Override
     public BigDecimal getYearsOfExperience() {
         return yearsOfExperience;
     }
@@ -71,20 +73,21 @@ public class CompetenceProfile implements Serializable {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    public Person getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Person personId) {
-        this.personId = personId;
-    }
-
+    @Override
     public Competence getCompetenceId() {
         return competenceId;
     }
 
     public void setCompetenceId(Competence competenceId) {
         this.competenceId = competenceId;
+    }
+
+    public Person getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Person personId) {
+        this.personId = personId;
     }
 
     @Override

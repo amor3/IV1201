@@ -10,36 +10,33 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AMore
+ * @author work
  */
 @Entity
 @Table(name = "competence")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Competence.findAll", query = "SELECT c FROM Competence c"),
-    @NamedQuery(name = "Competence.findByCompetenceId", query = "SELECT c FROM Competence c WHERE c.competenceId = :competenceId"),
-    @NamedQuery(name = "Competence.findByName", query = "SELECT c FROM Competence c WHERE c.name = :name")})
+    @NamedQuery(name = "Competence.findByCompetenceId", query = "SELECT c FROM Competence c WHERE c.competenceId = :competenceId")})
 public class Competence implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "competence_id")
     private Long competenceId;
-    @Size(max = 255)
-    @Column(name = "name")
-    private String name;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "competence")
     private CompetenceSv competenceSv;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "competence")
@@ -60,14 +57,6 @@ public class Competence implements Serializable {
 
     public void setCompetenceId(Long competenceId) {
         this.competenceId = competenceId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public CompetenceSv getCompetenceSv() {
@@ -118,5 +107,5 @@ public class Competence implements Serializable {
     public String toString() {
         return "se.kth.model.Competence[ competenceId=" + competenceId + " ]";
     }
-    
+
 }

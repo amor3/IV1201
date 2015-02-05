@@ -5,7 +5,9 @@
  */
 package se.kth.controller;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import se.kth.integration.CompetenceDAO;
 
 /**
  *
@@ -14,6 +16,13 @@ import javax.ejb.Stateful;
 @Stateful
 public class RecruiterController {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @EJB
+    private CompetenceDAO competenceDAO;
+
+    public void creatCompetence(String nameEN, String nameSV) {
+        if (nameEN != null && nameSV != null) {
+            competenceDAO.creatCompetenc(nameEN, nameSV);
+        }
+    }
+
 }
