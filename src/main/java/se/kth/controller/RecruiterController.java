@@ -5,9 +5,11 @@
  */
 package se.kth.controller;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import se.kth.integration.CompetenceDAO;
+import se.kth.model.CompetenceLangInterface;
 
 /**
  *
@@ -23,6 +25,14 @@ public class RecruiterController {
         if (nameEN != null && nameSV != null) {
             competenceDAO.creatCompetenc(nameEN, nameSV);
         }
+    }
+    public List<CompetenceLangInterface> getComptences(String lan){
+        if (lan != null){
+            return competenceDAO.getCompetences(lan);
+            
+        }
+      return null;  
+        
     }
 
 }

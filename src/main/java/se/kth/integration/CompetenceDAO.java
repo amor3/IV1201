@@ -12,6 +12,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
+import se.kth.model.CompetenceInterface;
+import se.kth.model.CompetenceLangInterface;
 import se.kth.model.CompetenceSv;
 
 /**
@@ -50,8 +52,17 @@ public class CompetenceDAO {
 
     }
 
-    public List<String> getCompetences(String lang) {
+    public List<CompetenceLangInterface> getCompetences(String lang) {
+        List<CompetenceLangInterface> lan = null;
+        if( lang.equals("en")){
+            lan =em.createNamedQuery("CompetenceEn.findAll", CompetenceLangInterface.class).getResultList();
+            
+        }
+        else if( lang.equals("sv")){
+            lan = em.createNamedQuery("CompetenceSv.findAll", CompetenceLangInterface.class).getResultList();
+            
+        }
 
-        return null;
+        return lan;
     }
 }

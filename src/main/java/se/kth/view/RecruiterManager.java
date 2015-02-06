@@ -8,10 +8,13 @@ package se.kth.view;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
 import javax.validation.constraints.NotNull;
 import se.kth.controller.RecruiterController;
+import se.kth.model.CompetenceLangInterface;
 
 /**
  *
@@ -30,10 +33,16 @@ public class RecruiterManager implements Serializable {
     @ManagedProperty(value = "#{availabilityManager}")
     private AvailabilityManager availabilityManager;
     
+    @ManagedProperty(value = "#{languageManager}")
+    private LanguageManager languageManager;
+    
+    
     @NotNull(message="{se.kth.view.required}")
     private String competenceEN;
     @NotNull(message="{se.kth.view.required}")
     private String competenceSV;
+    
+    private List<String> competence;
 
     public RecruiterManager() {
     }
@@ -84,8 +93,17 @@ public class RecruiterManager implements Serializable {
         if (competenceEN != null && competenceSV != null) {
             recruiter.creatCompetence(competenceEN, competenceSV);
         }
+       
 
         return "";
+    }
+    
+    public List<String> getCompetence(){
+        List <String> competence = new ArrayList<>(); 
+        for (CompetenceLangInterface c: recruiter.getComptences("sv")){
+            competence.add(c.getName());
+        }
+       return competence;
     }
 
 }
