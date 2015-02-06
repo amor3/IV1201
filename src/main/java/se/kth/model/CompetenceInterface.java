@@ -5,10 +5,13 @@
  */
 package se.kth.model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author AMore
  */
 public interface CompetenceInterface {
-    
+    public BigDecimal getYearsOfExperience();
+    public Competence getCompetenceId();
 }

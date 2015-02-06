@@ -5,21 +5,49 @@
  */
 package se.kth.view;
 
+import java.io.Serializable;
+import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author AMore
  */
 @Named(value = "competenceManager")
-@Dependent
-public class CompetenceManager {
+@ConversationScoped
+public class CompetenceManager implements Serializable{
+    private String competenceEN;
+    private String competenceSV;
+    
 
     /**
      * Creates a new instance of CompetenceManager
      */
     public CompetenceManager() {
     }
+      
+
+    public CompetenceManager(String competenceSV, String competenceEN) {
+        this.competenceSV = competenceSV;
+        this.competenceEN = competenceEN;
+    }
+
+    public String getCompetenceSV() {
+        return competenceSV;
+    }
+
+    public String getCompetenceEN() {
+        return competenceEN;
+    }
+
+    public void setCompetenceSV(String competenceSV) {
+        this.competenceSV = competenceSV;
+    }
+
+    public void setCompetenceEN(String competenceEN) {
+        this.competenceEN = competenceEN;
+    }
+    
     
 }
