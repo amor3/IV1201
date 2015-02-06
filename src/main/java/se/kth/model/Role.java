@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AMore
+ * @author work
  */
 @Entity
 @Table(name = "role")
@@ -40,7 +40,7 @@ public class Role implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "roleName")
     private String roleName;
-    @JoinTable(name = "Group", joinColumns = {
+    @JoinTable(name = "user_group", joinColumns = {
         @JoinColumn(name = "roleName", referencedColumnName = "roleName")}, inverseJoinColumns = {
         @JoinColumn(name = "email", referencedColumnName = "email")})
     @ManyToMany

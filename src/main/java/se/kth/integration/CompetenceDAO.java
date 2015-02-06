@@ -50,7 +50,7 @@ public class CompetenceDAO {
 
     }
 
-    public List<String> getCompetences() {
+    public List<String> getCompetences(String lang) {
 
         return null;
     }
