@@ -8,6 +8,21 @@
 		<view-id value="/faces/index.xhtml" />
 	</url-mapping>
         
+        <url-mapping id="login">
+		<pattern value="/login.xhtml" />
+		<view-id value="/faces/login.xhtml" />
+	</url-mapping>
+        
+        <url-mapping id="login-error">
+		<pattern value="/error.xhtml" />
+		<view-id value="/faces/error.xhtml" />
+	</url-mapping>
+        
+         <url-mapping id="admin-pages">
+		<pattern value="/admin" />
+		<view-id value="/faces/admin" />
+	</url-mapping>
+        
 
 
 </pretty-config>
