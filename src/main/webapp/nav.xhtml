@@ -5,9 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
-        <h:head>
-            <f:facet name="first">
+        <head>
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>PrimeFaces</title>
 
@@ -20,10 +18,9 @@
 
                 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
 
-            </f:facet>
-        </h:head>
+        </head>
 
-        <h:body>
+        <body>
 
             <ui:composition>
                 <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
@@ -39,7 +36,7 @@
                         </div>
                         <div class="navbar-collapse collapse pull-right" id="navbar-collapsible">
                             <ul class="nav navbar-nav navbar-left">
-                                <li><a href="#section1">#{messages.home}</a></li>
+                                <li><a href="index.xhtml">#{messages.home}</a></li>
                                 <li><a href="#section2">#{messages.attractions}</a></li>
                                 <li><a href="#section3">#{messages.contact}</a></li>
                                 <li><a href="#section4">#{messages.about}</a></li>
@@ -76,9 +73,8 @@
             <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
 
             <script src="js/scripts.js"></script>
-        </h:body>
+        </body>
 
-    </f:view>
 </html>
 
 
