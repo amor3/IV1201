@@ -10,6 +10,7 @@ import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
+import javax.validation.constraints.NotNull;
 import se.kth.controller.RecruiterController;
 
 /**
@@ -28,8 +29,10 @@ public class RecruiterManager implements Serializable {
 
     @ManagedProperty(value = "#{availabilityManager}")
     private AvailabilityManager availabilityManager;
-
+    
+    @NotNull(message="{se.kth.view.required}")
     private String competenceEN;
+    @NotNull(message="{se.kth.view.required}")
     private String competenceSV;
 
     public RecruiterManager() {
