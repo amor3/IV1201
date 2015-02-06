@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author work
+ * @author AMore
  */
 @Entity
 @Table(name = "person")
@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findBySsn", query = "SELECT p FROM Person p WHERE p.ssn = :ssn"),
     @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email"),
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password")})
-public class Person implements Serializable, PersonInterface {
+public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +59,7 @@ public class Person implements Serializable, PersonInterface {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "email", unique=true)
+    @Column(name = "email")
     private String email;
     @Size(max = 255)
     @Column(name = "password")
@@ -83,7 +83,6 @@ public class Person implements Serializable, PersonInterface {
         this.email = email;
     }
 
-    @Override
     public Long getPersonId() {
         return personId;
     }
@@ -92,7 +91,6 @@ public class Person implements Serializable, PersonInterface {
         this.personId = personId;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -101,7 +99,6 @@ public class Person implements Serializable, PersonInterface {
         this.name = name;
     }
 
-    @Override
     public String getSurname() {
         return surname;
     }
@@ -110,7 +107,6 @@ public class Person implements Serializable, PersonInterface {
         this.surname = surname;
     }
 
-    @Override
     public String getSsn() {
         return ssn;
     }
@@ -119,7 +115,6 @@ public class Person implements Serializable, PersonInterface {
         this.ssn = ssn;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
@@ -128,7 +123,6 @@ public class Person implements Serializable, PersonInterface {
         this.email = email;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -147,7 +141,6 @@ public class Person implements Serializable, PersonInterface {
     }
 
     @XmlTransient
-    @Override
     public Collection<CompetenceProfile> getCompetenceProfileCollection() {
         return competenceProfileCollection;
     }
@@ -157,7 +150,6 @@ public class Person implements Serializable, PersonInterface {
     }
 
     @XmlTransient
-    @Override
     public Collection<Availability> getAvailabilityCollection() {
         return availabilityCollection;
     }

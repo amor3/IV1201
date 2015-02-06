@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author work
+ * @author AMore
  */
 @Entity
 @Table(name = "competence")
@@ -30,10 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Competence.findAll", query = "SELECT c FROM Competence c"),
     @NamedQuery(name = "Competence.findByCompetenceId", query = "SELECT c FROM Competence c WHERE c.competenceId = :competenceId")})
 public class Competence implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "competence_id")
     private Long competenceId;
@@ -107,5 +106,5 @@ public class Competence implements Serializable {
     public String toString() {
         return "se.kth.model.Competence[ competenceId=" + competenceId + " ]";
     }
-
+    
 }
