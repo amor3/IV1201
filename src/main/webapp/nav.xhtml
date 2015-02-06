@@ -35,23 +35,23 @@
                     </div>
                     <div class="navbar-collapse collapse pull-right" id="navbar-collapsible">
                         <ul class="nav navbar-nav navbar-left">
-                            <li><a href="index.xhtml">#{messages.home}</a></li>
+                            <li><a href="/iv1201">#{messages.home}</a></li>
                             <li><a href="#section2">#{messages.attractions}</a></li>
                             <li><a href="#section3">#{messages.contact}</a></li>
                             <li><a href="#section4">#{messages.about}</a></li>
                             <li><a href="#section5">#{messages.ourHistory}</a></li>
-                            <li><a href="login.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
+                            <li><a href="/iv1201/faces/recruiter/index.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
 
                             <li style="padding-top: 18px; padding-left: 18px;">
                             <h:form>
                                 <h:commandLink action="#{languageManager.changeLanguage()}">
                                     <f:param name="languageCode" value="sv"/>
-                                    <h:graphicImage class="img-circle" value="img/swe_flag.png"/>
+                                    <h:graphicImage class="img-circle" value="/img/swe_flag.png"/>
                                 </h:commandLink>
                                 &nbsp;
                                 <h:commandLink action="#{languageManager.changeLanguage()}">
                                     <f:param name="languageCode" value="en"/>
-                                    <h:graphicImage class="img-circle" value="img/uk_flag.png"/>
+                                    <h:graphicImage class="img-circle" value="/img/uk_flag.png"/>
                                 </h:commandLink>
                             </h:form>
                             </li>

@@ -4,19 +4,7 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-    
-    
-    <filter>
-        <filter-name>NoCacheFilter</filter-name>
-        <filter-class>utilities.NoCacheFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>NoCacheFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    
-    
-    
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -31,10 +19,10 @@
             30
         </session-timeout>
     </session-config>
+    
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-
     <context-param>
         <param-name>
             javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
@@ -45,26 +33,23 @@
     
     
     
-    
-  
     <security-constraint>
         <display-name>AdminConstraint</display-name>
         <web-resource-collection>
             <web-resource-name>admin</web-resource-name>
             <description/>
-            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/faces/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMINS</role-name>
         </auth-constraint>
     </security-constraint>
-    
     <security-constraint>
         <display-name>RecruiterConstraint</display-name>
         <web-resource-collection>
             <web-resource-name>recruiter</web-resource-name>
             <description/>
-            <url-pattern>/recruiter/*</url-pattern>
+            <url-pattern>/faces/recruiter/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -72,13 +57,12 @@
             <role-name>RECRUITERS</role-name>
         </auth-constraint>
     </security-constraint>
-    
     <security-constraint>
         <display-name>ApplicantConstraint</display-name>
         <web-resource-collection>
             <web-resource-name>applicant</web-resource-name>
             <description/>
-            <url-pattern>/applicant/*</url-pattern>
+            <url-pattern>/faces/applicant/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -87,20 +71,14 @@
             <role-name>APPLICANTS</role-name>
         </auth-constraint>
     </security-constraint>
-    
-    
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>JDBCRealm</realm-name>
+        <realm-name>jdbc_realm</realm-name>
         <form-login-config>
-            <form-login-page>/login.xhtml</form-login-page>
-            <form-error-page>/error.xhtml</form-error-page>
+            <form-login-page>/faces/login.xhtml</form-login-page>
+            <form-error-page>/faces/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
-    
-    
-    
-    
     <security-role>
         <description/>
         <role-name>ADMINS</role-name>
@@ -113,6 +91,4 @@
         <description/>
         <role-name>APPLICANTS</role-name>
     </security-role>
-    
-    
 </web-app>

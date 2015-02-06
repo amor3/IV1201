@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author work
+ * @author AMore
  */
 @Entity
 @Table(name = "availability")
@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Availability.findByAvailabilityId", query = "SELECT a FROM Availability a WHERE a.availabilityId = :availabilityId"),
     @NamedQuery(name = "Availability.findByFromDate", query = "SELECT a FROM Availability a WHERE a.fromDate = :fromDate"),
     @NamedQuery(name = "Availability.findByToDate", query = "SELECT a FROM Availability a WHERE a.toDate = :toDate")})
-public class Availability implements Serializable, AvailabilityInterface {
+public class Availability implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,7 +66,6 @@ public class Availability implements Serializable, AvailabilityInterface {
         this.availabilityId = availabilityId;
     }
 
-    @Override
     public Date getFromDate() {
         return fromDate;
     }
@@ -75,7 +74,6 @@ public class Availability implements Serializable, AvailabilityInterface {
         this.fromDate = fromDate;
     }
 
-    @Override
     public Date getToDate() {
         return toDate;
     }

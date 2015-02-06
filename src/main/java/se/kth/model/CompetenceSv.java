@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author work
+ * @author AMore
  */
 @Entity
 @Table(name = "competence_sv")

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author work
+ * @author AMore
  */
 @Entity
 @Table(name = "competence_profile")
@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompetenceProfile.findAll", query = "SELECT c FROM CompetenceProfile c"),
     @NamedQuery(name = "CompetenceProfile.findByCompetenceProfileId", query = "SELECT c FROM CompetenceProfile c WHERE c.competenceProfileId = :competenceProfileId"),
     @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
-public class CompetenceProfile implements Serializable, CompetenceInterface {
+public class CompetenceProfile implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,12 +42,12 @@ public class CompetenceProfile implements Serializable, CompetenceInterface {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "years_of_experience")
     private BigDecimal yearsOfExperience;
-    @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
-    @OneToOne
-    private Competence competenceId;
     @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     @ManyToOne
     private Person personId;
+    @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
+    @OneToOne
+    private Competence competenceId;
 
     public CompetenceProfile() {
     }
@@ -64,7 +64,6 @@ public class CompetenceProfile implements Serializable, CompetenceInterface {
         this.competenceProfileId = competenceProfileId;
     }
 
-    @Override
     public BigDecimal getYearsOfExperience() {
         return yearsOfExperience;
     }
@@ -73,21 +72,20 @@ public class CompetenceProfile implements Serializable, CompetenceInterface {
         this.yearsOfExperience = yearsOfExperience;
     }
 
-    @Override
-    public Competence getCompetenceId() {
-        return competenceId;
-    }
-
-    public void setCompetenceId(Competence competenceId) {
-        this.competenceId = competenceId;
-    }
-
     public Person getPersonId() {
         return personId;
     }
 
     public void setPersonId(Person personId) {
         this.personId = personId;
+    }
+
+    public Competence getCompetenceId() {
+        return competenceId;
+    }
+
+    public void setCompetenceId(Competence competenceId) {
+        this.competenceId = competenceId;
     }
 
     @Override
