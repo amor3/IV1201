@@ -7,78 +7,73 @@
 
     <f:view locale="#{languageManager.locale}">
         <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+            <title>PrimeFaces</title>
 
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
 
-                <!-- Latest compiled and minified CSS -->
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
-                <!-- Optional theme -->
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
-
-                <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-
-            </f:facet>
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
         </h:head>
 
-        <h:body>
+        <body>
 
-            <ui:composition>
-                <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
-                                <span class="sr-only">Toggla</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" style="font-size: 2em;" href="#">Blåa Lund</a>
-                        </div>
-                        <div class="navbar-collapse collapse pull-right" id="navbar-collapsible">
-                            <ul class="nav navbar-nav navbar-left">
-                                <li><a href="#section1">#{messages.home}</a></li>
-                                <li><a href="#section2">#{messages.attractions}</a></li>
-                                <li><a href="#section3">#{messages.contact}</a></li>
-                                <li><a href="#section4">#{messages.about}</a></li>
-                                <li><a href="#section5">#{messages.ourHistory}</a></li>
-                                <li><a href="login.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
-
-                                <li style="padding-top: 18px; padding-left: 18px;">
-                                <h:form>
-                                    <h:commandLink action="#{languageManager.changeLanguage()}">
-                                        <f:param name="languageCode" value="sv"/>
-                                        <h:graphicImage class="img-circle" value="img/swe_flag.png"/>
-                                    </h:commandLink>
-                                    &nbsp;
-                                    <h:commandLink action="#{languageManager.changeLanguage()}">
-                                        <f:param name="languageCode" value="en"/>
-                                        <h:graphicImage class="img-circle" value="img/uk_flag.png"/>
-                                    </h:commandLink>
-                                </h:form>
-                                </li>
-
-                                <li>&nbsp;</li>
-                            </ul>
-
-                        </div>
+        <ui:composition>
+            <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapsible">
+                            <span class="sr-only">Toggla</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" style="font-size: 2em;" href="#">Blåa Lund</a>
                     </div>
-                </nav>
-            </ui:composition>
+                    <div class="navbar-collapse collapse pull-right" id="navbar-collapsible">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li><a href="index.xhtml">#{messages.home}</a></li>
+                            <li><a href="#section2">#{messages.attractions}</a></li>
+                            <li><a href="#section3">#{messages.contact}</a></li>
+                            <li><a href="#section4">#{messages.about}</a></li>
+                            <li><a href="#section5">#{messages.ourHistory}</a></li>
+                            <li><a href="login.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
+
+                            <li style="padding-top: 18px; padding-left: 18px;">
+                            <h:form>
+                                <h:commandLink action="#{languageManager.changeLanguage()}">
+                                    <f:param name="languageCode" value="sv"/>
+                                    <h:graphicImage class="img-circle" value="img/swe_flag.png"/>
+                                </h:commandLink>
+                                &nbsp;
+                                <h:commandLink action="#{languageManager.changeLanguage()}">
+                                    <f:param name="languageCode" value="en"/>
+                                    <h:graphicImage class="img-circle" value="img/uk_flag.png"/>
+                                </h:commandLink>
+                            </h:form>
+                            </li>
+
+                            <li>&nbsp;</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </ui:composition>
 
 
-            <!-- Script Libs -->
-            <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+        <!-- Script Libs -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
 
-            <script src="js/scripts.js"></script>
-        </h:body>
-
-    </f:view>
+        <script src="js/scripts.js"></script>
+    </body>
+</f:view>
 </html>
 
 
