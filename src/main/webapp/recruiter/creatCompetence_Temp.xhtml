@@ -13,10 +13,10 @@
             <h:form>
                 <h:panelGrid id="grid" columns="3" cellpadding="5">
                     <h:outputText value="English: " />
-                    <p:inputText id="competenceEN" value="#{recruiterManager.competenceEN}" />
+                    <p:inputText id="competenceEN" value="#{recruiterManager.competenceManager.competenceEN}" />
                     <p:message id="message1" for="competenceEN" style="color:red" display="text" />
                     <h:outputText value="Swedish: " />
-                    <p:inputText id="competenceSV" value="#{recruiterManager.competenceSV}"/>
+                    <p:inputText id="competenceSV" value="#{recruiterManager.competenceManager.competenceSV}"/>
                     <p:message id="message2" for="competenceSV" style="color:red" display="text" />
                 </h:panelGrid>
                 <p:commandButton value="Create" action="#{recruiterManager.creatCompetence()}" update="grid"/>
