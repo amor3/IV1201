@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -17,7 +18,10 @@ import javax.inject.Named;
 @Named(value = "competenceManager")
 @ConversationScoped
 public class CompetenceManager implements Serializable{
+    
+    @NotNull(message="{se.kth.view.required}")
     private String competenceEN;
+    @NotNull(message="{se.kth.view.required}")
     private String competenceSV;
     
 

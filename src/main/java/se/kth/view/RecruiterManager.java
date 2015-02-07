@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedProperty;
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import se.kth.controller.RecruiterController;
 import se.kth.model.CompetenceLangInterface;
@@ -26,21 +27,16 @@ public class RecruiterManager implements Serializable {
 
     @EJB
     private RecruiterController recruiter;
-
-    @ManagedProperty(value = "#{competenceManager}")
+    
+    @Inject
     private CompetenceManager competenceManager;
 
-    @ManagedProperty(value = "#{availabilityManager}")
+    @Inject
     private AvailabilityManager availabilityManager;
     
-    @ManagedProperty(value = "#{languageManager}")
+    @Inject
     private LanguageManager languageManager;
     
-    
-    @NotNull(message="{se.kth.view.required}")
-    private String competenceEN;
-    @NotNull(message="{se.kth.view.required}")
-    private String competenceSV;
     
     private List<String> competence;
 
@@ -54,25 +50,7 @@ public class RecruiterManager implements Serializable {
     public RecruiterManager(AvailabilityManager availabilityManager) {
         this.availabilityManager = availabilityManager;
     }
-
-    public String getCompetenceEN() {
-        return competenceEN;
-    }
-
-    public String getCompetenceSV() {
-        return competenceSV;
-    }
-
-    public void setCompetenceEN(String competenceEN) {
-        this.competenceEN = competenceEN;
-    }
-
-    public void setCompetenceSV(String competenceSV) {
-        this.competenceSV = competenceSV;
-    }
     
-    
-
     public CompetenceManager getCompetenceManager() {
         return competenceManager;
     }
@@ -90,8 +68,8 @@ public class RecruiterManager implements Serializable {
     }
 
     public String creatCompetence() {
-        if (competenceEN != null && competenceSV != null) {
-            recruiter.creatCompetence(competenceEN, competenceSV);
+        if (competenceManager.getCompetenceEN() != null && competenceManager.getCompetenceSV() != null) {
+            recruiter.creatCompetence(competenceManager.getCompetenceEN(), competenceManager.getCompetenceSV());
         }
        
 
@@ -99,8 +77,8 @@ public class RecruiterManager implements Serializable {
     }
     
     public List<String> getCompetence(){
-        List <String> competence = new ArrayList<>(); 
-        for (CompetenceLangInterface c: recruiter.getComptences("sv")){
+        competence = new ArrayList<>(); 
+        for (CompetenceLangInterface c: recruiter.getComptences(languageManager.getLanguage())){
             competence.add(c.getName());
         }
        return competence;
