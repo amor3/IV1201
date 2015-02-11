@@ -80,7 +80,7 @@
         </dependency>
         
         
-        <!-- for JSF 2.x -->
+        <!-- for JSF 2.x sdsd-->
         <dependency>
             <groupId>org.ocpsoft.rewrite</groupId>
             <artifactId>rewrite-servlet</artifactId>
