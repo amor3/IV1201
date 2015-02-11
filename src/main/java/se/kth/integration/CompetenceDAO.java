@@ -12,7 +12,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
-import se.kth.model.CompetenceInterface;
 import se.kth.model.CompetenceLangInterface;
 import se.kth.model.CompetenceSv;
 
