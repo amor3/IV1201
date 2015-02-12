@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author AMore
+ * @author AMore M
  */
 @RunWith(Arquillian.class)
 public class CompetenceDAOTest {
