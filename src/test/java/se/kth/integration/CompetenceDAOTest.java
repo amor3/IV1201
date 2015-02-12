@@ -21,7 +21,7 @@ public class CompetenceDAOTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(CompetenceDAO.class)
                 .addPackage("se.kth.model")
-                .addAsManifestResource("META-INF/test-persistence.xml", "test-persistence.xml")
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 //.addAsManifestResource("META-INF/orm.xml", "orm.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 
