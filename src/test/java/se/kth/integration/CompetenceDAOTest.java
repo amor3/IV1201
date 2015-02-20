@@ -1,5 +1,6 @@
 package se.kth.integration;
 
+import java.util.Random;
 import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -40,8 +41,11 @@ public class CompetenceDAOTest {
         // Get the old size
         int oldSize = instance.getCompetences(language).size();
 
+        Random rand = new Random();
+        int randomNum = rand.nextInt(9999);
+        
         // Add a new competence
-        instance.creatCompetenc("ENGLISHCOMPETENCE", "SVENSKKOMPETENS");
+        instance.creatCompetenc("ENGLISHCOMPETENCE_" + randomNum, "SVENSKKOMPETENS_" + randomNum);
 
         // Check if we get the right size
         assertEquals(oldSize + 1, instance.getCompetences(language).size());
