@@ -28,6 +28,12 @@ public class CompetenceDAO {
     @PersistenceContext(unitName = "RDB_PU")
     private EntityManager em;
 
+    /**
+     * create competences in both languages
+     * @param nameEn Competence Name in English
+     * @param nameSV Competence name in Swedish
+     * 
+     */
     public void creatCompetenc(String nameEN, String nameSV) {
         if (nameEN != null && nameSV != null) {
             CompetenceSv sv= null;
@@ -49,7 +55,12 @@ public class CompetenceDAO {
 
         }
     }
-
+/**
+     *
+     * This Method for removing a competence
+     * @param name name of the competence
+     * 
+     */
     public void removeCompetence(String name) {
 
     }

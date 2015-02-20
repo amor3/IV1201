@@ -38,7 +38,7 @@
                         <div class="login-panel panel" style="background-image: linear-gradient(to bottom, #337ab7 0px, #2e6da4 100%)">
                             <div class="panel-heading">
                                 <p class="text-center" style="margin-top: 20px;"> <i style="font-size:150px; color: white;" class="glyphicon glyphicon-user" /> </p>
-                                <h3 class="panel-title text-center" style="color:white; font-size: 30px; margin-bottom: 20px;">Arbetssökande</h3>
+                                <h3 class="panel-title text-center" style="color:white; font-size: 30px; margin-bottom: 20px;">#{messages.Arbetssökande}</h3>
                             </div> 
                             <div class="panel-body">
                                 
@@ -51,10 +51,10 @@
                                             ﻿<input type="password" class="form-control" name="j_password" id="password" placeholder="Lösenord" value="" tabindex="2" />
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
-                                        <button type="submit" id="submit" style="margin-top: 40px;" class="btn btn-lg btn-success btn-block" >Logga in</button>
+                                        <button type="submit" id="submit" style="margin-top: 40px;" class="btn btn-lg btn-success btn-block" >#{messages.loginMsg}</button>
                                         <p style="margin:20px; color: white; font-size: 20px;" class="text-center"> <i class="glyphicon glyphicon-minus" /> ? <i class="glyphicon glyphicon-minus" /> </p>
                                         
-                                        <button type="submit" name="log-me-in" id="submit" class="btn btn-lg btn-info btn-block" >Registrera</button>
+                                        <button type="submit" name="log-me-in" id="submit" class="btn btn-lg btn-info btn-block" >#{messages.RegsitMsg}</button>
                                     </fieldset>
                                 </form>
                             </div>
@@ -77,7 +77,7 @@
                         <div class="login-panel panel" style="background-image: linear-gradient(to bottom, #337ab7 0px, #2e6da4 100%)">
                             <div class="panel-heading">
                                 <p class="text-center" style="margin-top: 20px;"> <i style="font-size:150px; color: white;" class="glyphicon glyphicon-user" /> </p>
-                                <h3 class="panel-title text-center" style="color:white; font-size: 30px; margin-bottom: 20px;">Rekryterare</h3>
+                                <h3 class="panel-title text-center" style="color:white; font-size: 30px; margin-bottom: 20px;">#{messages.Rekryterare}</h3>
                             </div> 
                             <div class="panel-body">
                                 
@@ -85,15 +85,15 @@
                                 <form role="form">
                                     <fieldset>
                                         <div class="form-group">
-                                            <input class="form-control" placeholder="E-post" name="email" type="email" />
+                                            <input class="form-control"  name="email" type="email">#{messages.E-post} </>
                                         </div>
                                         <div class="form-group">
                                             <input class="form-control" placeholder="Lösenord" name="password" type="password" value="" />
                                         </div>
                                         <!-- Change this to a button or input when using this as a form -->
-                                        <button href="index.html" style="margin-top: 40px;" class="btn btn-lg btn-success btn-block" >Logga in</button>
+                                        <button href="index.html" style="margin-top: 40px;" class="btn btn-lg btn-success btn-block" >#{messages.loginMsg}</button>
                                         <p style="margin:20px; color: white; font-size: 20px;" class="text-center"> <i class="glyphicon glyphicon-minus" /> ? <i class="glyphicon glyphicon-minus" /> </p>
-                                        <button href="index.html" class="btn btn-lg btn-info btn-block" >Registrera</button>
+                                        <button href="index.html" class="btn btn-lg btn-info btn-block" >#{messages.RegsitMsg}</button>
                                     </fieldset>
                                 </form>
                             </div>
