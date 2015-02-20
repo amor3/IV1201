@@ -17,11 +17,15 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
 
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+            <h:outputStylesheet library="css" name="styles.css"  />
+
         </h:head>
 
         <body>
 
         <ui:composition>
+
             <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
@@ -40,18 +44,18 @@
                             <li><a href="#section3">#{messages.contact}</a></li>
                             <li><a href="#section4">#{messages.about}</a></li>
                             <li><a href="#section5">#{messages.ourHistory}</a></li>
-                            <li><a href="/iv1201/faces/recruiter/index.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
+                            <li><a href="/iv1201/faces/login.xhtml">#{messages.work} <i class="fa fa-thumbs-up"></i></a></li>
 
                             <li style="padding-top: 18px; padding-left: 18px;">
                             <h:form>
                                 <h:commandLink action="#{languageManager.changeLanguage()}">
                                     <f:param name="languageCode" value="sv"/>
-                                    <h:graphicImage class="img-circle" value="/img/swe_flag.png"/>
+                                    <h:graphicImage class="img-circle" library="img" name="swe_flag.png"/>
                                 </h:commandLink>
                                 &nbsp;
                                 <h:commandLink action="#{languageManager.changeLanguage()}">
                                     <f:param name="languageCode" value="en"/>
-                                    <h:graphicImage class="img-circle" value="/img/uk_flag.png"/>
+                                    <h:graphicImage class="img-circle" library="img" name="uk_flag.png"/>
                                 </h:commandLink>
                             </h:form>
                             </li>
