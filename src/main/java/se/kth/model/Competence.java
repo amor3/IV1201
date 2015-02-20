@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author workings
+ * @author work
  */
 @Entity
 @Table(name = "competence")
@@ -36,12 +36,10 @@ public class Competence implements Serializable {
     @Basic(optional = false)
     @Column(name = "competence_id")
     private Long competenceId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competence")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competenceId")
     private CompetenceSv competenceSv;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competence")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "competenceId")
     private CompetenceEn competenceEn;
-    @OneToOne(mappedBy = "competenceId")
-    private CompetenceProfile competenceProfile;
 
     public Competence() {
     }
@@ -72,14 +70,6 @@ public class Competence implements Serializable {
 
     public void setCompetenceEn(CompetenceEn competenceEn) {
         this.competenceEn = competenceEn;
-    }
-
-    public CompetenceProfile getCompetenceProfile() {
-        return competenceProfile;
-    }
-
-    public void setCompetenceProfile(CompetenceProfile competenceProfile) {
-        this.competenceProfile = competenceProfile;
     }
 
     @Override
