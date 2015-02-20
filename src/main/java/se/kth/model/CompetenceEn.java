@@ -53,8 +53,8 @@ public class CompetenceEn implements Serializable, CompetenceLangInterface {
         this.competenceId = competenceId;
     }
 
-    public CompetenceEn(Long competenceId, String name) {
-        this.competenceId = competenceId;
+    public CompetenceEn(Competence competence, String name) {
+        this.competence = competence;
         this.name = name;
     }
 
