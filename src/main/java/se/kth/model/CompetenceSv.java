@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -29,8 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "CompetenceSv.findAll", query = "SELECT c FROM CompetenceSv c"),
     @NamedQuery(name = "CompetenceSv.findByName", query = "SELECT c FROM CompetenceSv c WHERE c.name = :name"),
-    @NamedQuery(name = "CompetenceSv.findByCompetenceId", query = "SELECT c FROM CompetenceSv c WHERE c.competenceId = :competenceId")})
-public class CompetenceSv implements Serializable, CompetenceLangInterface{
+    @NamedQuery(name = "CompetenceSv.findById", query = "SELECT c FROM CompetenceSv c WHERE c.id = :id")})
+public class CompetenceSv implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -38,27 +40,26 @@ public class CompetenceSv implements Serializable, CompetenceLangInterface{
     @Column(name = "name")
     private String name;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "competenceId")
-    private Long competenceId;
-    @JoinColumn(name = "competenceId", referencedColumnName = "competence_id", insertable = false, updatable = false)
+    @Column(name = "id")
+    private Integer id;
+    @JoinColumn(name = "competenceId", referencedColumnName = "competence_id")
     @OneToOne(optional = false)
-    private Competence competence;
+    private Competence competenceId;
 
     public CompetenceSv() {
     }
 
-    public CompetenceSv(Long competenceId) {
-        this.competenceId = competenceId;
+    public CompetenceSv(Integer id) {
+        this.id = id;
     }
 
-    public CompetenceSv(Competence competence, String name) {
-        this.competence = competence;
+    public CompetenceSv(Competence competenceId, String name) {
+        this.competenceId = competenceId;
         this.name = name;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -67,26 +68,26 @@ public class CompetenceSv implements Serializable, CompetenceLangInterface{
         this.name = name;
     }
 
-    public Long getCompetenceId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Competence getCompetenceId() {
         return competenceId;
     }
 
-    public void setCompetenceId(Long competenceId) {
+    public void setCompetenceId(Competence competenceId) {
         this.competenceId = competenceId;
-    }
-
-    public Competence getCompetence() {
-        return competence;
-    }
-
-    public void setCompetence(Competence competence) {
-        this.competence = competence;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (competenceId != null ? competenceId.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +98,7 @@ public class CompetenceSv implements Serializable, CompetenceLangInterface{
             return false;
         }
         CompetenceSv other = (CompetenceSv) object;
-        if ((this.competenceId == null && other.competenceId != null) || (this.competenceId != null && !this.competenceId.equals(other.competenceId))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -105,7 +106,7 @@ public class CompetenceSv implements Serializable, CompetenceLangInterface{
 
     @Override
     public String toString() {
-        return "se.kth.model.CompetenceSv[ competenceId=" + competenceId + " ]";
+        return "se.kth.model.CompetenceSv[ id=" + id + " ]";
     }
     
 }
