@@ -7,6 +7,8 @@ package se.kth.integration;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -19,6 +21,7 @@ import se.kth.model.CompetenceSv;
  *
  * @author AMore
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class CompetenceDAO {
 
@@ -38,8 +41,8 @@ public class CompetenceDAO {
             if (sv == null && en == null) {
                 Competence competence = new Competence();
                 em.persist(competence);
-                sv = new CompetenceSv(competence.getCompetenceId(), nameSV);
-                en = new CompetenceEn(competence.getCompetenceId(), nameEN);
+                sv = new CompetenceSv(competence, nameSV);
+                en = new CompetenceEn(competence, nameEN);
                 em.persist(sv);
                 em.persist(en);
             }
