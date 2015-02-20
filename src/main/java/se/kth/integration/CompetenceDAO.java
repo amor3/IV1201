@@ -7,6 +7,8 @@ package se.kth.integration;
 
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -19,12 +21,19 @@ import se.kth.model.CompetenceSv;
  *
  * @author AMore
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class CompetenceDAO {
 
     @PersistenceContext(unitName = "RDB_PU")
     private EntityManager em;
 
+    /**
+     * create competences in both languages
+     * @param nameEn Competence Name in English
+     * @param nameSV Competence name in Swedish
+     * 
+     */
     public void creatCompetenc(String nameEN, String nameSV) {
         if (nameEN != null && nameSV != null) {
             CompetenceSv sv= null;
@@ -38,15 +47,20 @@ public class CompetenceDAO {
             if (sv == null && en == null) {
                 Competence competence = new Competence();
                 em.persist(competence);
-                sv = new CompetenceSv(competence.getCompetenceId(), nameSV);
-                en = new CompetenceEn(competence.getCompetenceId(), nameEN);
+                sv = new CompetenceSv(competence, nameSV);
+                en = new CompetenceEn(competence, nameEN);
                 em.persist(sv);
                 em.persist(en);
             }
 
         }
     }
-
+/**
+     *
+     * This Method for removing a competence
+     * @param name name of the competence
+     * 
+     */
     public void removeCompetence(String name) {
 
     }

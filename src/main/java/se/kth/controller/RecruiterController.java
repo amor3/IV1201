@@ -13,19 +13,31 @@ import se.kth.model.CompetenceLangInterface;
 
 /**
  *
- * @author AMore
+ * @author AMore e bäst
  */
+
 @Stateful
 public class RecruiterController {
 
     @EJB
     private CompetenceDAO competenceDAO;
-
+ /**
+     *
+     * @param nameEn Competence Name in English
+     * @param nameSV Competence name in Swedish
+     * 
+     */
     public void creatCompetence(String nameEN, String nameSV) {
         if (nameEN != null && nameSV != null) {
             competenceDAO.creatCompetenc(nameEN, nameSV);
         }
     }
+    /**
+     *
+     * @param lan  specify the which language
+     * @return competences in specific language
+     * 
+     */
     public List<CompetenceLangInterface> getComptences(String lan){
         if (lan != null){
             return competenceDAO.getCompetences(lan);
