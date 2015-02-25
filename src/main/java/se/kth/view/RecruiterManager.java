@@ -11,9 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import se.kth.controller.RecruiterController;
 import se.kth.model.CompetenceLangInterface;
 
@@ -71,8 +69,6 @@ public class RecruiterManager implements Serializable {
         if (competenceManager.getCompetenceEN() != null && competenceManager.getCompetenceSV() != null) {
             recruiter.creatCompetence(competenceManager.getCompetenceEN(), competenceManager.getCompetenceSV());
         }
-       
-
         return "";
     }
     

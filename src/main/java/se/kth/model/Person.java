@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "person_id")
     private Long personId;
@@ -78,8 +78,7 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
-    public Person(Long personId, String email) {
-        this.personId = personId;
+    public Person(String email) {
         this.email = email;
     }
 

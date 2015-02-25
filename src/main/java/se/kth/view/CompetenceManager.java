@@ -6,10 +6,15 @@
 package se.kth.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import se.kth.controller.CompetenceController;
+import se.kth.model.CompetenceLangInterface;
 
 /**
  *
@@ -24,13 +29,17 @@ public class CompetenceManager implements Serializable{
     @NotNull(message="{se.kth.view.required}")
     private String competenceSV;
     
-
-    /**
-     * Creates a new instance of CompetenceManager
-     */
+    private List<String> competences;
+    
+    @EJB
+    private CompetenceController competenceCtrl;
+    
+    @Inject
+    private LanguageManager languageManager;
+    
+    
     public CompetenceManager() {
     }
-      
 
     public CompetenceManager(String competenceSV, String competenceEN) {
         this.competenceSV = competenceSV;
@@ -52,6 +61,14 @@ public class CompetenceManager implements Serializable{
     public void setCompetenceEN(String competenceEN) {
         this.competenceEN = competenceEN;
     }
+
     
+    public List<String> getCompetences(){
+        competences = new ArrayList<>(); 
+        for (CompetenceLangInterface c: competenceCtrl.getComptences(languageManager.getLanguage())){
+            competences.add(c.getName());
+        }
+       return competences;
+    }
     
 }

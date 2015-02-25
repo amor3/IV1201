@@ -11,5 +11,4 @@ package se.kth.model;
  */
 public interface CompetenceLangInterface {
     public String getName();
-    
 }

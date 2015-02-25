@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
+
 
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -26,13 +29,13 @@
                 z-index: 999;
             }
         </style>
-            <script>
+        <script>
             $(document).ready(function () {
                 $('#toggle').fadeIn();
             });
         </script>
 
-        <ui:include src="nav.xhtml"></ui:include>
+        <ui:include src="../nav.xhtml"></ui:include>
 
 
         <div class="container" id="toggle">
@@ -68,24 +71,38 @@
                         <div class="col-md-8 well text-center">
 
 
-                            <form> 
+                            <h:form> 
                                 <div class="form-group">
-                                    <label for="a_email">Email address</label>
-                                    <input type="email" class="form-control" id="a_email" placeholder="Enter email" />
+                                    <label for="email">Email address</label>
+                                    <h:inputText value="#{registrationManager.email}"
+                                                 class="form-control" 
+                                                 a:placeholder="Email"
+                                                 id="email" />
+                                    <h:message id="message1" for="email" style="color:red"/>
+
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="a_password" placeholder="Password" />
+                                    <label for="password">Password</label>
+                                    <h:inputSecret value="#{registrationManager.password}"
+                                                   class="form-control" 
+                                                   a:placeholder="password"
+                                                   id="password" />
+                                    <h:message id="message2" for="password" style="color:red"/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="a_repeatpassword" placeholder="Repeat password" />
+                                    <h:inputSecret value="#{registrationManager.repeatPassword}"
+                                                   class="form-control"
+                                                   a:placeholder="Repeat password"
+                                                   id="repeatpassword" />
+                                    <h:message id="message3" for="repeatpassword" style="color:red"/>
                                 </div>
 
-                            </form>
+                                <h:commandButton id="step1" 
+                                                 value="Next"
+                                                 action="#{registrationManager.gotoPage2}"
+                                                 class="btn btn-success btn-lg" />
+                            </h:form>
 
-                            <a href="register_two.xhtml">
-                                <button id="activate-step-2" class="btn btn-success btn-lg">Next</button>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +122,7 @@
 
 
 
-    
+
 
 
     </h:body>

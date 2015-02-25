@@ -19,11 +19,8 @@ import org.primefaces.model.TreeNode;
 public class ApplicantManager implements Serializable {
      
     private TreeNode root1;
-     
     private TreeNode root2;
-     
     private TreeNode selectedNode1;
-     
     private TreeNode selectedNode2;
      
     @PostConstruct
@@ -34,7 +31,6 @@ public class ApplicantManager implements Serializable {
         TreeNode node01 = new DefaultTreeNode("Salary", root1);
         TreeNode node10 = new DefaultTreeNode("Gambler", root1);
         TreeNode node11 = new DefaultTreeNode("Machining", root1);
-         
          
          
         root2 = new DefaultTreeNode("Root2", null);

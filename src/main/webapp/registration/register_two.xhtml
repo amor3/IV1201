@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -28,7 +29,7 @@
         </style>
 
 
-        <ui:include src="nav.xhtml"></ui:include>
+        <ui:include src="../nav.xhtml"></ui:include>
 
 
         <div class="container" id="toggle">
@@ -66,40 +67,30 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-8 well text-center">
 
-
-                            <form> 
+                            <h:form>
                                 <div class="form-group">
-                                    <label for="a_name">Tell us who you are</label>
-                                    <input type="text" class="form-control" id="a_name" placeholder="Enter name" />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="a_address" placeholder="Enter address" />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="a_zip" placeholder="Enter zipcode" />
-                                </div>
-                                
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="a_city" placeholder="Enter city" />
-                                </div>
-                                
-                                
-                                <div class="form-group">
-                                    <label for="a_mobile">How can we chit chat with you?</label>
-                                    <input type="text" class="form-control" id="a_mobile" placeholder="Enter phonenumber" />
+                                    <label for="name">Tell us who you are</label>
+                                    <h:inputText value="#{registrationManager.firstname}" class="form-control" id="firstname" a:placeholder="Firstname"/>
                                 </div>
 
-                            </form>
+                                <div class="form-group">
+                                    <h:inputText value="#{registrationManager.surname}" class="form-control" id="surname" a:placeholder="Surname" />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <h:inputText value="#{registrationManager.ssn}" class="form-control" id="ssn" a:placeholder="SSN" />
+                                </div>
 
 
-                            <a href="register_one.xhtml">
-                                <button id="activate-step-2" class="btn btn-primary btn-lg">Back</button>
-                            </a>
-                            <a href="register_three.xhtml">
-                                <button id="activate-step-2" class="btn btn-success btn-lg">Next</button>
-                            </a>
+                                <h:commandButton id="step21" 
+                                                 value="Back"
+                                                 action="#{registrationManager.gotoPage1}"
+                                                 class="btn btn-primary btn-lg" />
+                                <h:commandButton id="step23" 
+                                                 value="Next"
+                                                 action="#{registrationManager.gotoPage3}"
+                                                 class="btn btn-success btn-lg" />
+                            </h:form>
                         </div>
                     </div>
                 </div>
