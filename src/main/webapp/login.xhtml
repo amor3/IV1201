@@ -10,38 +10,80 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js" />
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />         
+
         <h:outputStylesheet library="css" name="styles.css"  />
         <h:outputStylesheet library="css" name="login.css"  />
 
+                <script>
+            var changePage = function() {
+                $("#toggle").css("display", "none");
+
+                $("#toggle").fadeOut();
+
+                $("a.transition").click(function (event) {
+                    event.preventDefault();
+                    linkLocation = this.href;
+                    $("body").fadeOut( redirectPage);
+                });
+
+                function redirectPage() {
+                    window.location = linkLocation;
+                }
+            };
+        </script>
+        
     </h:head>
 
     <h:body>
+        <style>
 
+            body {
+                z-index: 999;
+            }
+        </style>
+
+
+        
+        
 
         <ui:include src="nav.xhtml"></ui:include>
 
 
-            <div class="container">
-                <div class="login-container">
-                    <div id="output"></div>
-                        
-                    <div class="avatar">
-                        <i style="margin-top:15px; color: #28a4c9;" class="fa fa-users fa-5x"></i>
-                    </div>
-                    
-                    <div class="form-box">
-                        <form action="" method="">
-                            <input name="user" type="text" placeholder="username" />
-                            <input type="password" placeholder="password" />
-                            <button class="btn btn-info btn-block login" type="submit">Login</button>
-                        </form>
-                    </div>
+        <div class="container" id="toggle">
+            <div class="login-container">
+                <div id="output"></div>
+                <div style="font-family: Lobster; color: #28a4c9; margin-bottom: 25px;"><h2>Welcome</h2></div>
+
+                <div class="avatar">
+                    <i style="margin-top:15px; color: #28a4c9;" class="fa fa-users fa-5x"></i>
+                </div>
+
+                <div class="form-box">
+                    <form method="post" action="j_security_check" accept-charset="utf-8">
+                        <input name="j_username" id="login_value" type="email" placeholder="Email" style="border-radius: 5px 5px 0 0;"/>
+                        <input name="j_password" id="password" type="password" placeholder="Password" />
+                        <button class="btn btn-info btn-block login" id="submit" type="submit">Login</button>
+                    </form>
                 </div>
 
             </div>
 
 
+            <div class="login-container">
+                <div style="font-family: Lobster; color: #28a4c9;">
+                    <h2>New applicant?</h2>
+                    <a href="register_one.xhtml" onclick="changePage()" style="color: #28a4c9;"><span style="font-size: 18px;">Sign up here <i class="fa fa-arrow-circle-o-right"></i></span></a>
+                </div>
+            </div>
+        </div>
+
+
+
         
+
 
     </h:body>
 
