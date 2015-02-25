@@ -7,14 +7,15 @@ package se.kth.view;
 
 import java.io.Serializable;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import se.kth.iv1201.utility.logger.Log;
 
 /**
  *
  * @author AMore
  */
+@Log
 @Named(value = "competenceManager")
 @ConversationScoped
 public class CompetenceManager implements Serializable{
