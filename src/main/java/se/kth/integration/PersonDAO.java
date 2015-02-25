@@ -6,11 +6,14 @@
 package se.kth.integration;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
  * @author AMore
  */
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class PersonDAO {
 

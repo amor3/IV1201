@@ -1,7 +1,14 @@
 package se.kth.integration;
 
 import java.util.Random;
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -15,7 +22,12 @@ import org.junit.runner.RunWith;
  * @author AMore
  */
 @RunWith(Arquillian.class)
+@Transactional
 public class CompetenceDAOTest {
+    
+    //@Resource
+    @Inject
+    UserTransaction utx;
 
     @Deployment
     public static JavaArchive createDeployment() {
@@ -35,9 +47,9 @@ public class CompetenceDAOTest {
      * Test of getCompetences, check if the instance is working as it should
      */
     @org.junit.Test
-    public void testCreateCompetence() {
+    public void testCreateCompetence() throws Exception {
         String language = "sv";
-
+        utx.begin();
         // Get the old size
         int oldSize = instance.getCompetences(language).size();
 
@@ -49,6 +61,7 @@ public class CompetenceDAOTest {
 
         // Check if we get the right size
         assertEquals(oldSize + 1, instance.getCompetences(language).size());
+        utx.commit();
     }
 
     /*
