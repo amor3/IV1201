@@ -1,12 +1,7 @@
 package se.kth.integration;
 
 import java.util.Random;
-import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;

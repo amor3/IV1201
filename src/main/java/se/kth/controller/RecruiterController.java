@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2015 The code Masters  <www.thecodemasters.se>.
+ * All rights reserved.
+ *
+ * using this code is prohebitted and not allowed, only under some exceptions
+ * by contacting the copyright holders ©The code Masters 2015
+ * 
  */
 package se.kth.controller;
 
@@ -24,7 +27,9 @@ public class RecruiterController {
     @EJB
     private CompetenceDAO competenceDAO;
  /**
-     *
+     *  This Method is to create comptences in both 
+     *  both languages (English & Swedish)
+     * 
      * @param nameEn Competence Name in English
      * @param nameSV Competence name in Swedish
      * 
@@ -35,7 +40,9 @@ public class RecruiterController {
         }
     }
     /**
-     *
+     *  Returns a list of competences in the language (en, sv)
+     *  stands for (English & Swedish)given in the parameter
+     * 
      * @param lan  specify the which language
      * @return competences in specific language
      * 
