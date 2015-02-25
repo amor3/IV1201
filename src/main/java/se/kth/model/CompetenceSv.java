@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompetenceSv.findAll", query = "SELECT c FROM CompetenceSv c"),
     @NamedQuery(name = "CompetenceSv.findByName", query = "SELECT c FROM CompetenceSv c WHERE c.name = :name"),
     @NamedQuery(name = "CompetenceSv.findById", query = "SELECT c FROM CompetenceSv c WHERE c.id = :id")})
-public class CompetenceSv implements Serializable {
+public class CompetenceSv implements Serializable, CompetenceLangInterface {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
@@ -60,6 +60,7 @@ public class CompetenceSv implements Serializable {
         this.name = name;
     }
 
+    @Override
     public String getName() {
         return name;
     }

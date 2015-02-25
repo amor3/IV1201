@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Availability implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "availability_id")
     private Long availabilityId;
@@ -56,6 +56,11 @@ public class Availability implements Serializable {
 
     public Availability(Long availabilityId) {
         this.availabilityId = availabilityId;
+    }
+    
+    public Availability(Date from, Date to) {
+        this.fromDate = from;
+        this.toDate = to;
     }
 
     public Long getAvailabilityId() {

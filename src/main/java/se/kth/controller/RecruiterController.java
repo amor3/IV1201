@@ -41,10 +41,8 @@ public class RecruiterController {
     public List<CompetenceLangInterface> getComptences(String lan){
         if (lan != null){
             return competenceDAO.getCompetences(lan);
-            
         }
       return null;  
-        
     }
 
 }
