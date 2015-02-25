@@ -21,7 +21,7 @@ import se.kth.model.CompetenceSv;
  *
  * @author AMore
  */
-@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class CompetenceDAO {
 
