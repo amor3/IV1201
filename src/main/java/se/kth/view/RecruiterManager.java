@@ -13,15 +13,17 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import se.kth.controller.RecruiterController;
+import se.kth.iv1201.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
 
 /**
  *
  * @author AMore
  */
+@Log
 @Named(value = "recruiterManager")
 @ConversationScoped
-public class RecruiterManager implements Serializable {
+public class RecruiterManager implements Serializable{
 
     @EJB
     private RecruiterController recruiter;

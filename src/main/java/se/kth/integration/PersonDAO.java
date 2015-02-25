@@ -12,11 +12,14 @@ import javax.persistence.PersistenceContext;
 import se.kth.model.Availability;
 import se.kth.model.CompetenceProfile;
 import se.kth.model.Person;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
  * @author AMore
  */
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class PersonDAO {
 
@@ -62,7 +65,7 @@ public class PersonDAO {
                 }
 
                 //person.setCompetenceProfileCollection(null);
-                em.persist(newProfile);
+                //em.persist(newProfile);
 
             } else {
                 System.out.println("Error in PersonDAO, user not null");

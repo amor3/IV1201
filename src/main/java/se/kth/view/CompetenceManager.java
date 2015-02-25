@@ -14,12 +14,15 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import se.kth.controller.CompetenceController;
+import se.kth.iv1201.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
+
 
 /**
  *
  * @author AMore
  */
+@Log
 @Named(value = "competenceManager")
 @ConversationScoped
 public class CompetenceManager implements Serializable{

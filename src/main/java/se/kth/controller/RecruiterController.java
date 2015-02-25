@@ -8,6 +8,8 @@ package se.kth.controller;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import se.kth.integration.CompetenceDAO;
 import se.kth.model.CompetenceLangInterface;
 
@@ -15,7 +17,7 @@ import se.kth.model.CompetenceLangInterface;
  *
  * @author AMore e bäst
  */
-
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateful
 public class RecruiterController {
 

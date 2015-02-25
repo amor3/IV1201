@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompetenceEn.findAll", query = "SELECT c FROM CompetenceEn c"),
     @NamedQuery(name = "CompetenceEn.findByName", query = "SELECT c FROM CompetenceEn c WHERE c.name = :name"),
     @NamedQuery(name = "CompetenceEn.findById", query = "SELECT c FROM CompetenceEn c WHERE c.id = :id")})
+
 public class CompetenceEn implements Serializable, CompetenceLangInterface {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
