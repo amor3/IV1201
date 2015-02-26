@@ -32,19 +32,20 @@ public class CompetenceDAO {
 
     /**
      * create competences in both languages
+     *
      * @param nameEn Competence Name in English
      * @param nameSV Competence name in Swedish
-     * 
+     *
      */
     public void creatCompetenc(String nameEN, String nameSV) {
         if (nameEN != null && nameSV != null) {
-            CompetenceSv sv= null;
-            CompetenceEn en= null;
+            CompetenceSv sv = null;
+            CompetenceEn en = null;
             try {
                 sv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class).setParameter("name", nameSV).getSingleResult();
                 en = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class).setParameter("name", nameEN).getSingleResult();
             } catch (NoResultException e) {
-               //e.printStackTrace();
+                //e.printStackTrace();
             }
             if (sv == null && en == null) {
                 Competence competence = new Competence();
@@ -57,25 +58,56 @@ public class CompetenceDAO {
 
         }
     }
-/**
+
+    /**
      *
      * This Method for removing a competence
+     *
      * @param name name of the competence
-     * 
+     *
      */
     public void removeCompetence(String name) {
+        CompetenceEn compEn = null;
+        CompetenceSv compSv = null;
+        Competence competence;
+        if (name != null) {
+            try {
+                compEn = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class)
+                        .setParameter("name", name)
+                        .getSingleResult();
+            } catch (NoResultException e) {
 
+            }
+            if (compEn == null) {
+                try {
+                    compSv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class)
+                            .setParameter("name", name)
+                            .getSingleResult();
+                } catch (NoResultException e) {
+
+                }
+                if (compSv == null) {
+                    System.out.println("No such competence");
+                    return;
+                } else {
+                    competence = compSv.getCompetenceId();
+                }
+            } else {
+                competence = compEn.getCompetenceId();
+            }
+            competence = em.find(Competence.class, competence.getCompetenceId());
+            em.remove(competence);
+        }
     }
 
     public List<CompetenceLangInterface> getCompetences(String lang) {
         List<CompetenceLangInterface> lan = null;
-        if( lang.equals("en")){
-            lan =em.createNamedQuery("CompetenceEn.findAll", CompetenceLangInterface.class).getResultList();
-            
-        }
-        else if( lang.equals("sv")){
+        if (lang.equals("en")) {
+            lan = em.createNamedQuery("CompetenceEn.findAll", CompetenceLangInterface.class).getResultList();
+
+        } else if (lang.equals("sv")) {
             lan = em.createNamedQuery("CompetenceSv.findAll", CompetenceLangInterface.class).getResultList();
-            
+
         }
 
         return lan;

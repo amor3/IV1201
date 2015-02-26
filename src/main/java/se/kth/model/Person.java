@@ -6,7 +6,9 @@
 package se.kth.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -66,7 +68,7 @@ public class Person implements Serializable {
     private String password;
     @ManyToMany(mappedBy = "personCollection")
     private Collection<Role> roleCollection;
-    @OneToMany(mappedBy = "personId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<CompetenceProfile> competenceProfileCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<Availability> availabilityCollection;
@@ -156,7 +158,7 @@ public class Person implements Serializable {
     public void setAvailabilityCollection(Collection<Availability> availabilityCollection) {
         this.availabilityCollection = availabilityCollection;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
