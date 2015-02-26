@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
@@ -145,9 +145,15 @@ public class RegistrationManager implements Serializable {
     }
     
     public String gotoPageFinal(){
-        openController.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());        
-        System.out.println("DateFrom: " + availableFrom);
-        System.out.println("DateTo: " + availableTo);
+        System.out.println("email" + this.email);
+        System.out.println("pass" + this.password);
+        System.out.println("name" + this.firstname);
+        System.out.println("name2" + this.surname);
+        System.out.println("ssn" + this.ssn);
+        System.out.println("from" + this.availableFrom);
+        System.out.println("to" + this.availableTo);
+        System.out.println(droppableCManager.getDroppedCompetences().get(0));
+        openController.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());   
         return "success";
     }
     
