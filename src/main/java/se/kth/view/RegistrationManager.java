@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import org.primefaces.event.SelectEvent;
 import se.kth.controller.OpenController;
-import se.kth.iv1201.utility.logger.Log;
+import se.kth.utility.logger.Log;
 
 
 /**

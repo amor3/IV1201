@@ -15,7 +15,7 @@ import se.kth.model.CompetenceProfile;
 import se.kth.model.Person;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import se.kth.iv1201.utility.logger.Log;
+import se.kth.utility.logger.Log;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
 import se.kth.model.CompetenceSv;
