@@ -8,11 +8,13 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import se.kth.controller.OpenController;
+import se.kth.iv1201.utility.logger.Log;
 
 /**
  *
  * @author AMore
  */
+@Log
 @Named(value = "registrationManager")
 @SessionScoped
 public class RegistrationManager implements Serializable {

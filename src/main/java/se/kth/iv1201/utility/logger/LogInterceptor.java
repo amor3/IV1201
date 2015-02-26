@@ -64,7 +64,7 @@ public class LogInterceptor implements Serializable{
             targetMethod.getName()};
         LOGGER.log(LEVEL, "Call to {0}.{1} completed", args);
         if (!isVoid(targetMethod)) {
-            LOGGER.log(LEVEL, "    Return value: {0}", returnValue);
+            LOGGER.log(LEVEL, "    Return value: {0}", returnValue.toString());
         }
     }
     
