@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import org.primefaces.event.SelectEvent;
 import se.kth.controller.OpenController;
+import se.kth.utility.beanValidation.Email;
 import se.kth.utility.logger.Log;
 
 
@@ -30,6 +31,7 @@ public class RegistrationManager implements Serializable {
     
     
     @NotNull(message="{se.kth.view.emailRequired}")
+    @Email
     private String email;
     @NotNull(message="{se.kth.view.required}")
     private String password;
