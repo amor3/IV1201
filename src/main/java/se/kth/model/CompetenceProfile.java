@@ -36,7 +36,7 @@ public class CompetenceProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "competence_profile_id")
     private Long competenceProfileId;
@@ -57,8 +57,8 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
-    public CompetenceProfile(Competence competence, BigDecimal yoe) {
-        this.yearsOfExperience = yoe;
+    public CompetenceProfile(Competence competence, Person personId) {
+        this.personId = personId;
         this.competenceId = competence;
     }
 

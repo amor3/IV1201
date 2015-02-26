@@ -54,6 +54,12 @@ public class Availability implements Serializable {
     public Availability() {
     }
 
+    public Availability(Person personId) {
+        this.personId = personId;
+    }
+    
+    
+
     public Availability(Long availabilityId) {
         this.availabilityId = availabilityId;
     }

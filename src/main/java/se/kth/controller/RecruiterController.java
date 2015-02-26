@@ -11,12 +11,14 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import se.kth.integration.CompetenceDAO;
+import se.kth.iv1201.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
 
 /**
  *
  * @author AMore e bäst
  */
+@Log
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateful
 public class RecruiterController {

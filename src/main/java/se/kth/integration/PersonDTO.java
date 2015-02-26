@@ -8,6 +8,7 @@ import java.util.List;
  * @author AMore
  */
 public class PersonDTO {
+
     private String email;
     private String password;
     private String firstname;
@@ -16,6 +17,9 @@ public class PersonDTO {
     private Date availableFrom;
     private Date availableTo;
     private List<String> competences;
+
+    public PersonDTO() {
+    }
 
     public PersonDTO(String email, String password, String firstname, String surname, String ssn, Date availableFrom, Date availableTo, List<String> competences) {
         this.email = email;
@@ -91,7 +95,14 @@ public class PersonDTO {
     public void setCompetences(List<String> competences) {
         this.competences = competences;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "email=" + email + ", password=" + password
+                + ", firstname=" + firstname + ", surname=" + surname
+                + ", ssn=" + ssn + ", availableFrom=" + availableFrom
+                + ", availableTo=" + availableTo
+                + ", competences=" + competences + '}';
+    }
+
 }

@@ -6,7 +6,9 @@
 package se.kth.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,6 +56,7 @@ public class Role implements Serializable {
     }
 
     public String getRoleName() {
+        
         return roleName;
     }
 
@@ -63,11 +66,20 @@ public class Role implements Serializable {
 
     @XmlTransient
     public Collection<Person> getPersonCollection() {
+        if (personCollection == null){
+            personCollection = new ArrayList<>();
+        }
         return personCollection;
     }
 
     public void setPersonCollection(Collection<Person> personCollection) {
         this.personCollection = personCollection;
+    }
+    
+    public void addPerson(Person person) {
+        List<Person> persons;
+        persons = (List<Person>) getPersonCollection();
+        persons.add(person);
     }
 
     @Override
