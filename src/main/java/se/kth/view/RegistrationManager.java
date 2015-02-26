@@ -1,13 +1,16 @@
 package se.kth.view;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.NotNull;
+import org.primefaces.event.SelectEvent;
 import se.kth.controller.OpenController;
+
 
 /**
  *
@@ -39,6 +42,7 @@ public class RegistrationManager implements Serializable {
     @NotNull(message="{se.kth.view.required}")
     private String ssn;
     
+    
     @NotNull(message="{se.kth.view.required}")
     private Date availableFrom;
     @NotNull(message="{se.kth.view.required}")
@@ -50,6 +54,12 @@ public class RegistrationManager implements Serializable {
     public RegistrationManager() {
     }
 
+    public void onDateSelect(SelectEvent event) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    }
+     
+    
+    
     public String getEmail() {
         return email;
     }
@@ -95,6 +105,7 @@ public class RegistrationManager implements Serializable {
     }
 
     public void setAvailableFrom(Date availableFrom) {
+        System.out.println("DateFrom: " + availableFrom);
         this.availableFrom = availableFrom;
     }
 
@@ -103,6 +114,7 @@ public class RegistrationManager implements Serializable {
     }
 
     public void setAvailableTo(Date availableTo) {
+        System.out.println("DateTo: " + availableTo);
         this.availableTo = availableTo;
     }
 
@@ -132,6 +144,8 @@ public class RegistrationManager implements Serializable {
     
     public String gotoPageFinal(){
         openController.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());        
+        System.out.println("DateFrom: " + availableFrom);
+        System.out.println("DateTo: " + availableTo);
         return "success";
     }
     

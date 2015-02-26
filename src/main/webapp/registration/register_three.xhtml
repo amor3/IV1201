@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -79,17 +78,23 @@
                                                 var droppedCompetence = ui.draggable;
                                                 droppedCompetence.fadeOut('fast');
                                             }
+                                            ;
                                         </script>
 
                                         <h:form id="competenceForm">
-                                            
-                                            
+
+
                                             <div class="control-group">
                                                 <label for="date-picker-1" class="control-label">Available from</label>
                                                 <div class="controls">
                                                     <div class="input-group">
-                                                        <h:inputText id="date-picker-1" value="#{registrationManager.availableFrom}" class="date-picker form-control" />
                                                         <label for="date-picker-1" class="input-group-addon btn">
+                                                        <p:calendar id="cal-1" 
+                                                                    value="#{registrationManager.availableFrom}" 
+                                                                    pattern="yyyy/MM/dd">
+                                                            <p:ajax event="dateSelect" listener="#{registrationManager.onDateSelect}" />
+                                                        </p:calendar>
+
                                                             <span class="glyphicon glyphicon-calendar">
                                                             </span>
                                                         </label>
@@ -102,8 +107,13 @@
                                                 <label for="date-picker-2" class="control-label">Available to</label>
                                                 <div class="controls">
                                                     <div class="input-group">
-                                                        <h:inputText id="date-picker-2" value="#{registrationManager.availableTo}" class="date-picker form-control" />
                                                         <label for="date-picker-2" class="input-group-addon btn">
+                                                        <p:calendar id="cal-2" 
+                                                                    value="#{registrationManager.availableTo}" 
+                                                                    pattern="yyyy/MM/dd">
+                                                            <p:ajax event="dateSelect" listener="#{registrationManager.onDateSelect}" />
+                                                        </p:calendar>
+                                                        
                                                             <span class="glyphicon glyphicon-calendar">
                                                             </span>
                                                         </label>
@@ -191,16 +201,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <script>
-                        $(".date-picker").datepicker();
-
-                        $(".date-picker").on("change", function () {
-                            var id = $(this).attr("id");
-                            var val = $("label[for='" + id + "']").text();
-                            $("#msg").text(val + " changed");
-                        });
-                    </script>
                 </h:form>    
 
 
