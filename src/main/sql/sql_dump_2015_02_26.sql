@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 26, 2015 at 12:31 PM
+-- Generation Time: Feb 26, 2015 at 02:40 PM
 -- Server version: 5.5.41
 -- PHP Version: 5.3.10-1ubuntu3.16
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `availability` (
   `to_date` date DEFAULT NULL,
   PRIMARY KEY (`availability_id`),
   KEY `person_id` (`person_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3155 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3259 ;
 
 --
 -- Dumping data for table `availability`
@@ -52,7 +52,7 @@ INSERT INTO `availability` (`availability_id`, `person_id`, `from_date`, `to_dat
 CREATE TABLE IF NOT EXISTS `competence` (
   `competence_id` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`competence_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3211 ;
 
 --
 -- Dumping data for table `competence`
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `competence_en` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `competenceId` (`competenceId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3113 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3213 ;
 
 --
 -- Dumping data for table `competence_en`
@@ -96,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `competence_profile` (
   `competence_id` bigint(20) DEFAULT NULL,
   `years_of_experience` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`competence_profile_id`),
-  UNIQUE KEY `competence_id` (`competence_id`),
-  KEY `person_id` (`person_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3154 ;
+  KEY `person_id` (`person_id`),
+  KEY `competence_id` (`competence_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3258 ;
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `competence_sv` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `competenceId` (`competenceId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3112 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3212 ;
 
 --
 -- Dumping data for table `competence_sv`
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3152 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3256 ;
 
 --
 -- Dumping data for table `person`
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `SEQUENCE` (
 --
 
 INSERT INTO `SEQUENCE` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', 3200);
+('SEQ_GEN', 3300);
 
 -- --------------------------------------------------------
 

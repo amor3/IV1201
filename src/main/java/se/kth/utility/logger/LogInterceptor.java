@@ -25,7 +25,7 @@ public class LogInterceptor implements Serializable{
 
     private static final Logger LOGGER = Logger.getLogger("se.kth");
     //FINE is a message level providing tracing information.
-    private static final Level LEVEL = Level.SEVERE;
+    private static final Level LEVEL = Level.FINE;
 
     /**
      * Logs entry to and exit from a method. Also logs parameter values, return

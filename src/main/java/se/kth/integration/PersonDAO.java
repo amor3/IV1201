@@ -21,9 +21,11 @@ import se.kth.model.CompetenceProfile;
 import se.kth.model.Person;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import se.kth.model.AvailabilityInterface;
 import se.kth.utility.logger.Log;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
+import se.kth.model.CompetenceInterface;
 import se.kth.model.CompetenceSv;
 import se.kth.model.PersonInterface;
 import se.kth.model.Role;
@@ -132,9 +134,35 @@ public class PersonDAO {
         }
     }
 
+    public PersonDTO getApplicant(String email) {
+        PersonDTO personDTO = null;
+        
+        if (email != null) {
+            Person user = null;
+
+            try {
+                user = em.createNamedQuery("Person.findByEmail", Person.class)
+                        .setParameter("email", email)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                System.out.println("No result exception");
+            }
+
+            if (user != null) {
+                personDTO = new PersonDTO(email, "secret", user.getName(), user.getSurname(), user.getSsn(), null, null, null);
+            } else {
+                System.out.println("Error in PersonDAO, user already exist");
+            }
+            return personDTO;
+        }    
+        return null;
+    }
+
     public List<PersonInterface> getAllApplicantes() {
         List<PersonInterface> applicantes;
-        applicantes = em.createNamedQuery("Person.findAll", PersonInterface.class).getResultList();
+        applicantes
+                = em.createNamedQuery("Person.findAll", PersonInterface.class
+                ).getResultList();
 
         return applicantes;
     }
