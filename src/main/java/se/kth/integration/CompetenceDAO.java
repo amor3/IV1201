@@ -12,7 +12,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import se.kth.iv1201.utility.logger.Log;
+import se.kth.utility.logger.Log;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
 import se.kth.model.CompetenceLangInterface;

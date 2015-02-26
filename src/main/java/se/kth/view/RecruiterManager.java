@@ -13,7 +13,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import se.kth.controller.RecruiterController;
-import se.kth.iv1201.utility.logger.Log;
+import se.kth.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
 
 /**

@@ -1,6 +1,6 @@
 /*
  */
-package se.kth.iv1201.utility.logger;
+package se.kth.utility.logger;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.ElementType.METHOD;

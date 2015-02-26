@@ -1,6 +1,6 @@
 /*
  */
-package se.kth.iv1201.utility.logger;
+package se.kth.utility.logger;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;

@@ -5,6 +5,6 @@
        bean-discovery-mode="all">
     
     <interceptors>
-        <class>se.kth.iv1201.utility.logger.LogInterceptor</class>
+        <class>se.kth.utility.logger.LogInterceptor</class>
     </interceptors>
 </beans>
