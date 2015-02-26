@@ -1,3 +1,9 @@
+/*
+ * Copyright 2015 The Code Masters <info@thecodemasters.se>.
+ * All rights reserved.
+ * 
+ */
+
 package se.kth.view;
 
 import java.io.Serializable;

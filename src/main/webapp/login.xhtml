@@ -55,7 +55,7 @@
         <div class="container" id="toggle">
             <div class="login-container">
                 <div id="output"></div>
-                <div style="font-family: Lobster; color: #28a4c9; margin-bottom: 25px;"><h2>Welcome</h2></div>
+                <div style="font-family: Lobster; color: #28a4c9; margin-bottom: 25px;"><h2>#{messages.WelcomeMsg}</h2></div>
 
                 <div class="avatar">
                     <i style="margin-top:15px; color: #28a4c9;" class="fa fa-users fa-5x"></i>
@@ -65,7 +65,7 @@
                     <form method="post" action="j_security_check" accept-charset="utf-8">
                         <input name="j_username" id="login_value" type="email" placeholder="Email" style="border-radius: 5px 5px 0 0;"/>
                         <input name="j_password" id="password" type="password" placeholder="Password" />
-                        <button class="btn btn-info btn-block login" id="submit" type="submit">Login</button>
+                        <button class="btn btn-info btn-block login" id="submit" type="submit">#{messages.loginMsg}</button>
                     </form>
                 </div>
 
@@ -74,8 +74,8 @@
 
             <div class="login-container">
                 <div style="font-family: Lobster; color: #28a4c9;">
-                    <h2>New applicant?</h2>
-                    <a href="registration/register.xhtml" onclick="changePage()" style="color: #28a4c9;"><span style="font-size: 18px;">Sign up here <i class="fa fa-arrow-circle-o-right"></i></span></a>
+                    <h2>#{messages.NewApplicantMsg}</h2>
+                    <a href="registration/register.xhtml" onclick="changePage()" style="color: #28a4c9;"><span style="font-size: 18px;">#{messages.signUpMsg}<i class="fa fa-arrow-circle-o-right"></i></span></a>
                 </div>
             </div>
         </div>
