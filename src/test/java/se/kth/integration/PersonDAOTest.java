@@ -5,6 +5,7 @@
  */
 package se.kth.integration;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,9 +65,10 @@ public class PersonDAOTest {
         String ssn = "191900001111";
         Date availableFrom = new Date();
         Date availableTo = new Date();
-        List<String> competences = new ArrayList<>();
-        competences.add("competence1");
-        competences.add("competence2");
+        List<CompetenceProfileDTO> competences = new ArrayList<>();
+        competences.add(new CompetenceProfileDTO("competence1",BigDecimal.ONE));
+        competences.add(new CompetenceProfileDTO("competence2",BigDecimal.ONE));
+        competences.add(new CompetenceProfileDTO("competence2",BigDecimal.ONE));
 
         PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
         utx.begin();
@@ -80,7 +82,7 @@ public class PersonDAOTest {
 
         // Check if we get the right size
         assertEquals(oldSize + 1, personInstance.getAllApplicantes().size());
-        personInstance.removeApplicant("email@kth.se");
+        personInstance.removePerson("email@kth.se");
         utx.commit();
     }
     
@@ -93,9 +95,9 @@ public class PersonDAOTest {
         String ssn = "191900001111";
         Date availableFrom = new Date();
         Date availableTo = new Date();
-        List<String> competences = new ArrayList<>();
-        competences.add("competence1");
-        competences.add("competence2");
+        List<CompetenceProfileDTO> competences = new ArrayList<>();
+        competences.add(new CompetenceProfileDTO("competence1",BigDecimal.ONE));
+        competences.add(new CompetenceProfileDTO("competence2",BigDecimal.ONE));
 
         PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
         utx.begin();
@@ -107,7 +109,7 @@ public class PersonDAOTest {
         
         
         
-        personInstance.removeApplicant("email@kth.se");
+        personInstance.removePerson("email@kth.se");
 
         // Check if we get the right size
         assertEquals(oldSize - 1, personInstance.getAllApplicantes().size());

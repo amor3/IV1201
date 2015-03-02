@@ -161,6 +161,7 @@ public class RegistrationManager implements Serializable {
         System.out.println("from" + this.availableFrom);
         System.out.println("to" + this.availableTo);
         System.out.println(droppableCManager.getDroppedCompetences().get(0));
+        
         openController.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());   
         return "success";
     }

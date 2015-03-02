@@ -3,7 +3,6 @@
  * All rights reserved.
  * 
  */
-
 package se.kth.integration;
 
 import java.math.BigDecimal;
@@ -42,11 +41,9 @@ public class PersonDAO {
     @PersistenceContext(unitName = "RDB_PU")
     private EntityManager em;
 
-    public void createApplicant(PersonDTO personDTO) {
-
+    private Person createPerson(PersonDTO personDTO) {
+        Person user = null;
         if (personDTO != null) {
-            Person user = null;
-
             try {
                 user = em.createNamedQuery("Person.findByEmail", Person.class)
                         .setParameter("email", personDTO.getEmail())
@@ -61,64 +58,99 @@ public class PersonDAO {
                 person.setSurname(personDTO.getSurname());
                 person.setSsn(personDTO.getSsn());
                 person.setPassword(getEncryptedPassword(personDTO.getPassword()));
-
-                //em.persist(person);
-                //person = em.find(Person.class, person.getPersonId());
-                Role role = em.find(Role.class, "APPLICANTS");
                 em.persist(person);
-                role.addPerson(person);
-                em.persist(role);
-                CompetenceEn compEn = null;
-                CompetenceSv compSv = null;
-                Competence competenceId;
-                CompetenceProfile competenceProfile;
+                return person;
+            }
+        }
+        return user;
+    }
 
-                for (String comp : personDTO.getCompetences()) {
-                    try {
-                        compEn = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class)
-                                .setParameter("name", comp)
-                                .getSingleResult();
-                    } catch (NoResultException e) {
+    private void addPersonToRole(Person person, String roleName) {
+        Role role = em.find(Role.class, roleName);
+        role.addPerson(person);
+        em.persist(role);
+    }
 
-                    }
-                    if (compEn == null) {
-                        try {
-                            compSv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class)
-                                    .setParameter("name", comp)
-                                    .getSingleResult();
-                        } catch (NoResultException e) {
+    private void addAvailability(Person person, PersonDTO personDTO) {
+        if (personDTO.getAvailableFrom().before(personDTO.getAvailableTo())) {
+            Availability availability = new Availability(person);
+            availability.setFromDate(personDTO.getAvailableFrom());
+            availability.setToDate(personDTO.getAvailableTo());
+            em.persist(availability);
+        }
+    }
 
-                        }
-                        if (compSv == null) {
-                            System.out.println("No such competence");
-                            return;
-                        } else {
-                            competenceId = compSv.getCompetenceId();
-                        }
-                    } else {
-                        competenceId = compEn.getCompetenceId();
-                    }
+    private void addCompetences(Person person, PersonDTO personDTO) {
+        CompetenceEn compEn = null;
+        CompetenceSv compSv = null;
+        Competence competenceId;
+        CompetenceProfile competenceProfile;
 
-                    competenceId = em.find(Competence.class, competenceId.getCompetenceId());
-                    competenceProfile = new CompetenceProfile(competenceId, person);
-                    competenceProfile.setYearsOfExperience(BigDecimal.ONE);
-                    em.persist(competenceProfile);
+        for (CompetenceProfileDTO comp : personDTO.getCompetences()) {
+            try {
+                compEn = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class)
+                        .setParameter("name", comp.getName())
+                        .getSingleResult();
+            } catch (NoResultException e) {
+
+            }
+            if (compEn == null) {
+                try {
+                    compSv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class)
+                            .setParameter("name", comp.getName())
+                            .getSingleResult();
+                } catch (NoResultException e) {
 
                 }
+                if (compSv == null) {
+                    System.out.println("No such competence");
+                    return;
+                } else {
+                    competenceId = compSv.getCompetenceId();
+                }
+            } else {
+                competenceId = compEn.getCompetenceId();
+            }
 
-                Availability availability = new Availability(person);
+            competenceId = em.find(Competence.class, competenceId.getCompetenceId());
+            em.refresh(person);
+            competenceProfile = new CompetenceProfile(competenceId, person);
+            if (!person.getCompetenceProfileCollection().contains(competenceProfile)) {
 
-                availability.setFromDate(personDTO.getAvailableFrom());
-                availability.setToDate(personDTO.getAvailableTo());
-                em.persist(availability);
+                competenceProfile.setYearsOfExperience(comp.getYearsOfExperience());
+                em.persist(competenceProfile);
+            }
 
+        }
+    }
+
+    public void createApplicant(PersonDTO personDTO) {
+
+        if (personDTO != null) {
+            Person user = createPerson(personDTO);
+            if (user != null) {
+                addPersonToRole(user, "APPLICANTS");
+                addAvailability(user, personDTO);
+                addCompetences(user, personDTO);
             } else {
                 System.out.println("Error in PersonDAO, user already exist");
             }
         }
     }
 
-    public void removeApplicant(String email) {
+    public void createRecriuter(PersonDTO personDTO) {
+
+        if (personDTO != null) {
+            Person user = createPerson(personDTO);
+            if (user != null) {
+                addPersonToRole(user, "RECRUITERS");
+            } else {
+                System.out.println("Error in PersonDAO, user already exist");
+            }
+        }
+    }
+
+    public void removePerson(String email) {
         Person user = null;
         if (email != null) {
             try {
@@ -134,9 +166,23 @@ public class PersonDAO {
         }
     }
 
+    public PersonInterface getPerson(String email) {
+        PersonInterface person = null;
+        if (email != null) {
+            try {
+                person = em.createNamedQuery("Person.findByEmail", PersonInterface.class)
+                        .setParameter("email", email)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                System.out.println("User does not exist");
+            }
+        }
+        return person;
+    }
+
     public PersonDTO getApplicant(String email) {
         PersonDTO personDTO = null;
-        
+
         if (email != null) {
             Person user = null;
 
@@ -154,7 +200,7 @@ public class PersonDAO {
                 System.out.println("Error in PersonDAO, user already exist");
             }
             return personDTO;
-        }    
+        }
         return null;
     }
 
