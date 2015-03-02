@@ -7,6 +7,7 @@
 package se.kth.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,9 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Competence.findAll", query = "SELECT c FROM Competence c"),
     @NamedQuery(name = "Competence.findByCompetenceId", query = "SELECT c FROM Competence c WHERE c.competenceId = :competenceId")})
 public class Competence implements Serializable {
+    @OneToMany(mappedBy = "competenceId")
+    private Collection<CompetenceProfile> competenceProfileCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -96,6 +101,15 @@ public class Competence implements Serializable {
     @Override
     public String toString() {
         return "se.kth.model.Competence[ competenceId=" + competenceId + " ]";
+    }
+
+    @XmlTransient
+    public Collection<CompetenceProfile> getCompetenceProfileCollection() {
+        return competenceProfileCollection;
+    }
+
+    public void setCompetenceProfileCollection(Collection<CompetenceProfile> competenceProfileCollection) {
+        this.competenceProfileCollection = competenceProfileCollection;
     }
     
 }

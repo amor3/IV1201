@@ -1,7 +1,7 @@
 /*
- * Copyright 2015 The Code Masters <info@thecodemasters.se>.
- * All rights reserved.
- * 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package se.kth.model;
 
@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,11 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CompetenceProfile.findAll", query = "SELECT c FROM CompetenceProfile c"),
     @NamedQuery(name = "CompetenceProfile.findByCompetenceProfileId", query = "SELECT c FROM CompetenceProfile c WHERE c.competenceProfileId = :competenceProfileId"),
     @NamedQuery(name = "CompetenceProfile.findByYearsOfExperience", query = "SELECT c FROM CompetenceProfile c WHERE c.yearsOfExperience = :yearsOfExperience")})
-public class CompetenceProfile implements Serializable {
-
+public class CompetenceProfile implements Serializable, CompetenceProfileInterface {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "competence_profile_id")
     private Long competenceProfileId;
@@ -47,7 +45,7 @@ public class CompetenceProfile implements Serializable {
     @ManyToOne
     private Person personId;
     @JoinColumn(name = "competence_id", referencedColumnName = "competence_id")
-    @OneToOne
+    @ManyToOne
     private Competence competenceId;
 
     public CompetenceProfile() {
@@ -61,7 +59,7 @@ public class CompetenceProfile implements Serializable {
         this.personId = personId;
         this.competenceId = competence;
     }
-
+    
     public Long getCompetenceProfileId() {
         return competenceProfileId;
     }
@@ -70,6 +68,7 @@ public class CompetenceProfile implements Serializable {
         this.competenceProfileId = competenceProfileId;
     }
 
+    @Override
     public BigDecimal getYearsOfExperience() {
         return yearsOfExperience;
     }
@@ -108,7 +107,7 @@ public class CompetenceProfile implements Serializable {
             return false;
         }
         CompetenceProfile other = (CompetenceProfile) object;
-        if ((this.competenceProfileId == null && other.competenceProfileId != null) || (this.competenceProfileId != null && !this.competenceProfileId.equals(other.competenceProfileId))) {
+        if (!(this.personId.equals(other.personId) && this.competenceId.equals(other.competenceId))) {
             return false;
         }
         return true;
@@ -118,5 +117,5 @@ public class CompetenceProfile implements Serializable {
     public String toString() {
         return "se.kth.model.CompetenceProfile[ competenceProfileId=" + competenceProfileId + " ]";
     }
-
+    
 }

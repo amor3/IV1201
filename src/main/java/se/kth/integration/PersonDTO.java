@@ -22,12 +22,12 @@ public class PersonDTO {
     private String ssn;
     private Date availableFrom;
     private Date availableTo;
-    private List<String> competences;
+    private List<CompetenceProfileDTO> competences;
 
     public PersonDTO() {
     }
 
-    public PersonDTO(String email, String password, String firstname, String surname, String ssn, Date availableFrom, Date availableTo, List<String> competences) {
+    public PersonDTO(String email, String password, String firstname, String surname, String ssn, Date availableFrom, Date availableTo, List<CompetenceProfileDTO> competences) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -94,11 +94,11 @@ public class PersonDTO {
         this.availableTo = availableTo;
     }
 
-    public List<String> getCompetences() {
+    public List<CompetenceProfileDTO> getCompetences() {
         return competences;
     }
 
-    public void setCompetences(List<String> competences) {
+    public void setCompetences(List<CompetenceProfileDTO> competences) {
         this.competences = competences;
     }
 

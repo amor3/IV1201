@@ -15,6 +15,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findBySsn", query = "SELECT p FROM Person p WHERE p.ssn = :ssn"),
     @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email"),
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password")})
-public class Person implements Serializable {
+public class Person implements Serializable, PersonInterface {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,7 +71,7 @@ public class Person implements Serializable {
     private String password;
     @ManyToMany(mappedBy = "personCollection")
     private Collection<Role> roleCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
+    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<CompetenceProfile> competenceProfileCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<Availability> availabilityCollection;
@@ -86,6 +87,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    @Override
     public Long getPersonId() {
         return personId;
     }
@@ -94,6 +96,7 @@ public class Person implements Serializable {
         this.personId = personId;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -102,6 +105,7 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    @Override
     public String getSurname() {
         return surname;
     }
@@ -110,6 +114,7 @@ public class Person implements Serializable {
         this.surname = surname;
     }
 
+    @Override
     public String getSsn() {
         return ssn;
     }
@@ -118,6 +123,7 @@ public class Person implements Serializable {
         this.ssn = ssn;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
@@ -126,6 +132,7 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -144,6 +151,7 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
+    @Override
     public Collection<CompetenceProfile> getCompetenceProfileCollection() {
         return competenceProfileCollection;
     }
@@ -153,6 +161,7 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
+    @Override
     public Collection<Availability> getAvailabilityCollection() {
         return availabilityCollection;
     }
