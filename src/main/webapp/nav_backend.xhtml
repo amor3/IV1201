@@ -90,7 +90,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> #{userManagedBean.firstname} #{userManagedBean.lastname} <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> #{applicantManager.firstname} #{applicantManager.lastname} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="/Instrukt/faces/user/edit_profile.xhtml"><i class="fa fa-fw fa-user"></i> Min profil</a>
@@ -101,7 +101,7 @@
                             <li class="divider"></li>
                             <li>
                                 <h:form>
-                                    <h:commandLink style="margin-left:20px;" action="#{userManagedBean.loggout()}"><i class="fa fa-fw fa-power-off"></i> Logga ut</h:commandLink>
+                                    <h:commandLink style="margin-left:20px;" action="#{applicantManager.loggout()}"><i class="fa fa-fw fa-power-off"></i> Logga ut</h:commandLink>
                                 </h:form>
                             </li>
                         </ul>
@@ -133,15 +133,19 @@
                         <h:panelGroup rendered="true">
                             <li>
                                 <a href="#" style="background-color: #d9534f; color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Rekryterare</a>
+                                    Rekryterare</a>
                             </li>
                             <li>
-                                <a href="/iv1201/faces/rec/new_user.xhtml" style="color: white; font-weight: bold;">
+                                <a href="/iv1201/faces/recruiter/search_user.xhtml" style="color: white; font-weight: bold;">
                                     <i class="fa fa-fw fa-gear"></i> Sök ansökningar</a>
                             </li>
                             <li>
-                                <a href="/iv1201/faces/admin/create_competence.xhtml" style="color: white; font-weight: bold;">
+                                <a href="/iv1201/faces/recruiter/accept_applicants.xhtml" style="color: white; font-weight: bold;">
                                     <i class="fa fa-fw fa-gear"></i> Godkänn ansökningar</a>
+                            </li>
+                            <li>
+                                <a href="/iv1201/faces/recruiter/new_competence.xhtml" style="color: white; font-weight: bold;">
+                                    <i class="fa fa-fw fa-gear"></i> Ny kompetens</a>
                             </li>
                         </h:panelGroup>
                         
@@ -152,10 +156,10 @@
                             <li>
                                 <a href="#" 
                                    style="background-color: #337ab7; color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Administratör</a>
+                                     Administratör</a>
                             </li>
                             <li>
-                                <a href="/Instrukt/faces/admin/new_user.xhtml"
+                                <a href="/iv1201/faces/admin/new_recruiter.xhtml"
                                    style="color: white; font-weight: bold;">
                                     <i class="fa fa-fw fa-gear"></i> Ny rekryterare</a>
                             </li>
