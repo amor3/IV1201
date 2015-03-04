@@ -35,6 +35,7 @@ public class RecruiterController {
     public void creatCompetence(String nameEN, String nameSV) {
         if (nameEN != null && nameSV != null) {
             competenceDAO.creatCompetenc(nameEN, nameSV);
+            
         }
     }
     /**

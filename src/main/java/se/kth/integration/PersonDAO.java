@@ -57,7 +57,7 @@ public class PersonDAO {
                 person.setName(personDTO.getFirstname());
                 person.setSurname(personDTO.getSurname());
                 person.setSsn(personDTO.getSsn());
-                person.setPassword(getEncryptedPassword(personDTO.getPassword()));
+                //person.setPassword(getEncryptedPassword(personDTO.getPassword()));
                 em.persist(person);
                 return person;
             }
