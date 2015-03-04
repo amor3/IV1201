@@ -6,10 +6,14 @@
 
 package se.kth.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import se.kth.integration.DuplicateEntryException;
+import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;
 import se.kth.integration.PersonDTO;
 
@@ -29,15 +33,20 @@ public class AdminController {
      * as an ID for the recruiter
      * 
      * @param email 
+     * @throws se.kth.integration.DuplicateEntryException 
      */
     
-    public void createRecriuter(String email){
+    public void createRecriuter(String email) throws DuplicateEntryException{
         if(email != null){
-            personDAO.createRecriuter(new PersonDTO(email));
+            try {
+                personDAO.createRecriuter(new PersonDTO(email));
+            } catch (NullArgumentException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
 
-    // Add business logic below. (Right-click in editor and choose
+    // TODO: Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
