@@ -3,9 +3,9 @@
  * All rights reserved.
  * 
  */
-
 package se.kth.view;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotNull;
 import org.primefaces.event.SelectEvent;
 import se.kth.controller.OpenController;
@@ -22,7 +28,6 @@ import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
 import se.kth.utility.beanValidation.Email;
 import se.kth.utility.logger.Log;
-
 
 /**
  *
@@ -35,45 +40,37 @@ public class RegistrationManager implements Serializable {
 
     @EJB
     private OpenController openController;
-    
+
     @Inject
     private DroppableCManager droppableCManager;
-    
-    
-    @NotNull(message="{se.kth.view.emailRequired}")
+
+    @NotNull(message = "{se.kth.view.emailRequired}")
     @Email
     private String email;
-    @NotNull(message="{se.kth.view.required}")
+    @NotNull(message = "{se.kth.view.required}")
     private String password;
-    @NotNull(message="{se.kth.view.required}")
+    @NotNull(message = "{se.kth.view.required}")
     private String repeatPassword;
-    
-    
-    @NotNull(message="{se.kth.view.required}")
-    private String firstname;
-    @NotNull(message="{se.kth.view.required}")
-    private String surname;
-    @NotNull(message="{se.kth.view.required}")
-    private String ssn;
-    
-    
-    @NotNull(message="{se.kth.view.required}")
-    private Date availableFrom;
-    @NotNull(message="{se.kth.view.required}")
-    private Date availableTo;
-    
 
-    
-    
+    @NotNull(message = "{se.kth.view.required}")
+    private String firstname;
+    @NotNull(message = "{se.kth.view.required}")
+    private String surname;
+    @NotNull(message = "{se.kth.view.required}")
+    private String ssn;
+
+    @NotNull(message = "{se.kth.view.required}")
+    private Date availableFrom;
+    @NotNull(message = "{se.kth.view.required}")
+    private Date availableTo;
+
     public RegistrationManager() {
     }
 
     public void onDateSelect(SelectEvent event) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     }
-     
-    
-    
+
     public String getEmail() {
         return email;
     }
@@ -139,10 +136,6 @@ public class RegistrationManager implements Serializable {
     public void setSsn(String ssn) {
         this.ssn = ssn;
     }
-    
-    
-    
-    
 
     public String gotoPage1() {
         return "success";
@@ -155,8 +148,8 @@ public class RegistrationManager implements Serializable {
     public String gotoPage3() {
         return "success";
     }
-    
-    public String gotoPageFinal(){
+
+    public String gotoPageFinal() {
         System.out.println("email" + this.email);
         System.out.println("pass" + this.password);
         System.out.println("name" + this.firstname);
@@ -165,22 +158,17 @@ public class RegistrationManager implements Serializable {
         System.out.println("from" + this.availableFrom);
         System.out.println("to" + this.availableTo);
         System.out.println(droppableCManager.getDroppedCompetences().get(0));
-        
-        try {   
-            openController.createApplicant(email, password, firstname, surname, 
-                                           ssn, availableFrom, availableTo, 
-                                           droppableCManager.getDroppedCompetences());
+
+        try {
+            openController.createApplicant(email, password, firstname, surname,
+                    ssn, availableFrom, availableTo,
+                    droppableCManager.getDroppedCompetences());
         } catch (DuplicateEntryException ex) {
             //TODO: popup message applicant alrady exists
         } catch (NullArgumentException ex) {
             Logger.getLogger(RegistrationManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return "success";
     }
-    
-    
 
-    
-    
-    
 }

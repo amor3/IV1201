@@ -39,7 +39,6 @@ public class OpenController {
         PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
 
         personDAO.createApplicant(personDTO);
-
     }
 
 }
