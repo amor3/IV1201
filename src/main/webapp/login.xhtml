@@ -17,23 +17,6 @@
         <h:outputStylesheet library="css" name="styles.css"  />
         <h:outputStylesheet library="css" name="login.css"  />
 
-                <script>
-            var changePage = function() {
-                $("#toggle").css("display", "none");
-
-                $("#toggle").fadeOut();
-
-                $("a.transition").click(function (event) {
-                    event.preventDefault();
-                    linkLocation = this.href;
-                    $("body").fadeOut( redirectPage);
-                });
-
-                function redirectPage() {
-                    window.location = linkLocation;
-                }
-            };
-        </script>
         
     </h:head>
 
@@ -75,7 +58,7 @@
             <div class="login-container">
                 <div style="font-family: Lobster; color: #28a4c9;">
                     <h2>#{messages.NewApplicantMsg}</h2>
-                    <a href="registration/register.xhtml" onclick="changePage()" style="color: #28a4c9;">
+                    <a href="/iv1201/faces/registration/register.xhtml" style="color: #28a4c9;">
                         <span style="font-size: 18px;">#{messages.signUpMsg}<i class="fa fa-arrow-circle-o-right"></i></span>
                     </a>
                 </div>
