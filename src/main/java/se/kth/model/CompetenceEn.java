@@ -79,6 +79,7 @@ public class CompetenceEn implements Serializable, CompetenceLangInterface {
         this.id = id;
     }
 
+    @Override
     public Competence getCompetenceId() {
         return competenceId;
     }

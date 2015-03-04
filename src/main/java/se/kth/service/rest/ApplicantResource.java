@@ -5,6 +5,8 @@
  */
 package se.kth.service.rest;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.core.Context;
@@ -21,8 +23,11 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import se.kth.integration.DoesNotExistException;
+import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;
 import se.kth.integration.PersonDTO;
+import se.kth.model.PersonInterface;
 
 /**
  * REST Web Service
@@ -59,9 +64,16 @@ public class ApplicantResource {
     @Path("/{email}")
     public Response getApplicant(@PathParam("email") String email) {        
         
-        PersonDTO personDTO = personDAO.getApplicant(email);
+        PersonInterface person = null;
+        try {
+            person = personDAO.getPerson(email);
+        } catch (DoesNotExistException ex) {
+            Logger.getLogger(ApplicantResource.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullArgumentException ex) {
+            Logger.getLogger(ApplicantResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
-        return  Response.status(200).entity(personDTO).build();
+        return  Response.status(200).entity(person).build();
     }
 
     

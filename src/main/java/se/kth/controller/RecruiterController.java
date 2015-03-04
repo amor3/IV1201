@@ -12,6 +12,8 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import se.kth.integration.CompetenceDAO;
+import se.kth.integration.DuplicateEntryException;
+import se.kth.integration.NullArgumentException;
 import se.kth.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
 
@@ -32,7 +34,7 @@ public class RecruiterController {
      * @param nameSV Competence name in Swedish
      * 
      */
-    public void creatCompetence(String nameEN, String nameSV) {
+    public void creatCompetence(String nameEN, String nameSV) throws DuplicateEntryException, NullArgumentException {
         if (nameEN != null && nameSV != null) {
             competenceDAO.creatCompetenc(nameEN, nameSV);
         }

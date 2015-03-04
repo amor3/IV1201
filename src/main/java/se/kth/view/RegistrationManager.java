@@ -9,6 +9,8 @@ package se.kth.view;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -16,6 +18,8 @@ import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 import org.primefaces.event.SelectEvent;
 import se.kth.controller.OpenController;
+import se.kth.integration.DuplicateEntryException;
+import se.kth.integration.NullArgumentException;
 import se.kth.utility.beanValidation.Email;
 import se.kth.utility.logger.Log;
 
@@ -162,7 +166,15 @@ public class RegistrationManager implements Serializable {
         System.out.println("to" + this.availableTo);
         System.out.println(droppableCManager.getDroppedCompetences().get(0));
         
-        openController.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());   
+        try {   
+            openController.createApplicant(email, password, firstname, surname, 
+                                           ssn, availableFrom, availableTo, 
+                                           droppableCManager.getDroppedCompetences());
+        } catch (DuplicateEntryException ex) {
+            //TODO: popup message applicant alrady exists
+        } catch (NullArgumentException ex) {
+            Logger.getLogger(RegistrationManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         return "success";
     }
     

@@ -3,7 +3,6 @@
  * All rights reserved.
  * 
  */
-
 package se.kth.view;
 
 import javax.inject.Named;
@@ -11,9 +10,13 @@ import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import se.kth.controller.RecruiterController;
+import se.kth.integration.DuplicateEntryException;
+import se.kth.integration.NullArgumentException;
 import se.kth.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
 
@@ -24,21 +27,20 @@ import se.kth.model.CompetenceLangInterface;
 @Log
 @Named(value = "recruiterManager")
 @ConversationScoped
-public class RecruiterManager implements Serializable{
+public class RecruiterManager implements Serializable {
 
     @EJB
     private RecruiterController recruiter;
-    
+
     @Inject
     private CompetenceManager competenceManager;
 
     @Inject
     private AvailabilityManager availabilityManager;
-    
+
     @Inject
     private LanguageManager languageManager;
-    
-    
+
     private List<String> competence;
 
     public RecruiterManager() {
@@ -51,7 +53,7 @@ public class RecruiterManager implements Serializable{
     public RecruiterManager(AvailabilityManager availabilityManager) {
         this.availabilityManager = availabilityManager;
     }
-    
+
     public CompetenceManager getCompetenceManager() {
         return competenceManager;
     }
@@ -70,17 +72,23 @@ public class RecruiterManager implements Serializable{
 
     public String creatCompetence() {
         if (competenceManager.getCompetenceEN() != null && competenceManager.getCompetenceSV() != null) {
-            recruiter.creatCompetence(competenceManager.getCompetenceEN(), competenceManager.getCompetenceSV());
+            try {
+                recruiter.creatCompetence(competenceManager.getCompetenceEN(), competenceManager.getCompetenceSV());
+            } catch (DuplicateEntryException ex) {
+                //TODO: popup message competence alrady exists
+            } catch (NullArgumentException ex) {
+                Logger.getLogger(RecruiterManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return "";
     }
-    
-    public List<String> getCompetence(){
-        competence = new ArrayList<>(); 
-        for (CompetenceLangInterface c: recruiter.getComptences(languageManager.getLanguage())){
+
+    public List<String> getCompetence() {
+        competence = new ArrayList<>();
+        for (CompetenceLangInterface c : recruiter.getComptences(languageManager.getLanguage())) {
             competence.add(c.getName());
         }
-       return competence;
+        return competence;
     }
 
 }

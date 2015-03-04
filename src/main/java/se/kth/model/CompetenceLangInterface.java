@@ -11,5 +11,6 @@ package se.kth.model;
  * @author macbook
  */
 public interface CompetenceLangInterface {
+    public Competence getCompetenceId();
     public String getName();
 }
