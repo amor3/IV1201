@@ -42,6 +42,8 @@ public class RecruiterManager implements Serializable {
     private LanguageManager languageManager;
 
     private List<String> competence;
+    
+    private String email;
 
     public RecruiterManager() {
     }
@@ -89,6 +91,14 @@ public class RecruiterManager implements Serializable {
             competence.add(c.getName());
         }
         return competence;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
