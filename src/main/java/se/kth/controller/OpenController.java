@@ -11,6 +11,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import se.kth.integration.CompetenceProfileDTO;
+import se.kth.integration.DuplicateEntryException;
+import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;
 import se.kth.integration.PersonDTO;
 
@@ -32,7 +34,7 @@ public class OpenController {
             String ssn,
             Date availableFrom,
             Date availableTo,
-            List<CompetenceProfileDTO> competences) {
+            List<CompetenceProfileDTO> competences) throws DuplicateEntryException, NullArgumentException {
 
         PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
 

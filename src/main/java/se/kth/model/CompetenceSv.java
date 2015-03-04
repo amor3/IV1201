@@ -78,6 +78,7 @@ public class CompetenceSv implements Serializable, CompetenceLangInterface {
         this.id = id;
     }
 
+    @Override
     public Competence getCompetenceId() {
         return competenceId;
     }

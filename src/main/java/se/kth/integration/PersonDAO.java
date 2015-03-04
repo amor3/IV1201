@@ -5,12 +5,12 @@
  */
 package se.kth.integration;
 
-import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -20,11 +20,9 @@ import se.kth.model.CompetenceProfile;
 import se.kth.model.Person;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import se.kth.model.AvailabilityInterface;
 import se.kth.utility.logger.Log;
 import se.kth.model.Competence;
 import se.kth.model.CompetenceEn;
-import se.kth.model.CompetenceInterface;
 import se.kth.model.CompetenceSv;
 import se.kth.model.PersonInterface;
 import se.kth.model.Role;
@@ -41,34 +39,44 @@ public class PersonDAO {
     @PersistenceContext(unitName = "RDB_PU")
     private EntityManager em;
 
-    private Person createPerson(PersonDTO personDTO) {
+    private Person createPerson(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
         Person user = null;
         if (personDTO != null) {
-            try {
-                user = em.createNamedQuery("Person.findByEmail", Person.class)
-                        .setParameter("email", personDTO.getEmail())
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                System.out.println("No result exception");
-            }
+            if (personDTO.getEmail() != null && personDTO.getPassword()!= null) {
+                try {
+                    user = em.createNamedQuery("Person.findByEmail", Person.class)
+                            .setParameter("email", personDTO.getEmail())
+                            .getSingleResult();
+                } catch (NoResultException e) {
 
-            if (user == null) {
-                Person person = new Person(personDTO.getEmail());
-                person.setName(personDTO.getFirstname());
-                person.setSurname(personDTO.getSurname());
-                person.setSsn(personDTO.getSsn());
-                person.setPassword(getEncryptedPassword(personDTO.getPassword()));
-                em.persist(person);
-                return person;
+                }
+
+                if (user == null) {
+                    Person person = new Person(personDTO.getEmail());
+                    person.setName(personDTO.getFirstname());
+                    person.setSurname(personDTO.getSurname());
+                    person.setSsn(personDTO.getSsn());
+                    person.setPassword(getEncryptedPassword(personDTO.getPassword()));
+                    em.persist(person);
+                    return person;
+                } else {
+                    throw new DuplicateEntryException("Person alrady exist.");
+                }
+            } else {
+                throw new NullArgumentException("Null argument personDTO.email/personDTO.password");
             }
         }
         return user;
     }
 
-    private void addPersonToRole(Person person, String roleName) {
+    private void addPersonToRole(Person person, String roleName) throws DoesNotExistException {
         Role role = em.find(Role.class, roleName);
-        role.addPerson(person);
-        em.persist(role);
+        if (role != null) {
+            role.addPerson(person);
+            em.persist(role);
+        } else {
+            throw new DoesNotExistException("Role does not exist.");
+        }
     }
 
     private void addAvailability(Person person, PersonDTO personDTO) {
@@ -124,33 +132,67 @@ public class PersonDAO {
         }
     }
 
-    public void createApplicant(PersonDTO personDTO) {
+    /**
+     * Creates a new applicant
+     *
+     * @param personDTO that contains all the needed information about the new
+     * applicant
+     * @throws DuplicateEntryException
+     * @throws NullArgumentException
+     */
+    public void createApplicant(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
 
         if (personDTO != null) {
             Person user = createPerson(personDTO);
             if (user != null) {
-                addPersonToRole(user, "APPLICANTS");
+                try {
+                    addPersonToRole(user, "APPLICANTS");
+                } catch (DoesNotExistException ex) {
+                    Logger.getLogger(PersonDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 addAvailability(user, personDTO);
                 addCompetences(user, personDTO);
-            } else {
-                System.out.println("Error in PersonDAO, user already exist");
             }
+        } else {
+            throw new NullArgumentException("Null argument personDTO");
         }
     }
 
-    public void createRecriuter(PersonDTO personDTO) {
+    /**
+     * Creates a new recruiter
+     *
+     * @param personDTO that contains all the needed information about the new
+     * recruiter
+     * @throws DuplicateEntryException
+     * @throws NullArgumentException
+     */
+    public void createRecriuter(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
 
         if (personDTO != null) {
+            personDTO.setPassword(newPassword(6));
+            //System.out.println(personDTO.getPassword());
+            //TODO: send password via mail to the new recruiter. 
             Person user = createPerson(personDTO);
             if (user != null) {
-                addPersonToRole(user, "RECRUITERS");
-            } else {
-                System.out.println("Error in PersonDAO, user already exist");
+                try {
+                    addPersonToRole(user, "RECRUITERS");
+                } catch (DoesNotExistException ex) {
+                    Logger.getLogger(PersonDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } else {
+            throw new NullArgumentException("Null argument personDTO");
         }
     }
 
-    public void removePerson(String email) {
+    /**
+     * Removes the person with the given e-mail
+     *
+     * @param email of the person to be removed
+     * @throws DoesNotExistException
+     * @throws NullArgumentException
+     */
+    public void removePerson(String email) throws DoesNotExistException, NullArgumentException {
         Person user = null;
         if (email != null) {
             try {
@@ -158,15 +200,25 @@ public class PersonDAO {
                         .setParameter("email", email)
                         .getSingleResult();
             } catch (NoResultException e) {
-                System.out.println("User does not exist");
+                throw new DoesNotExistException("User does not exist.");
             }
             if (user != null) {
                 em.remove(user);
             }
+        } else {
+            throw new NullArgumentException("Null argument email");
         }
     }
 
-    public PersonInterface getPerson(String email) {
+    /**
+     * Gets the person with the given e-mail
+     *
+     * @param email the email of the person to be returned
+     * @return a person interface
+     * @throws DoesNotExistException
+     * @throws NullArgumentException
+     */
+    public PersonInterface getPerson(String email) throws DoesNotExistException, NullArgumentException {
         PersonInterface person = null;
         if (email != null) {
             try {
@@ -174,43 +226,46 @@ public class PersonDAO {
                         .setParameter("email", email)
                         .getSingleResult();
             } catch (NoResultException e) {
-                System.out.println("User does not exist");
+                throw new DoesNotExistException("User does not exist.");
             }
+            return person;
+        } else {
+            throw new NullArgumentException("Null argument email");
         }
-        return person;
+
     }
 
-    public PersonDTO getApplicant(String email) {
-        PersonDTO personDTO = null;
-
-        if (email != null) {
-            Person user = null;
-
-            try {
-                user = em.createNamedQuery("Person.findByEmail", Person.class)
-                        .setParameter("email", email)
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                System.out.println("No result exception");
-            }
-
-            if (user != null) {
-                personDTO = new PersonDTO(email, "secret", user.getName(), user.getSurname(), user.getSsn(), null, null, null);
-            } else {
-                System.out.println("Error in PersonDAO, user already exist");
-            }
-            return personDTO;
-        }
-        return null;
-    }
-
-    public List<PersonInterface> getAllApplicantes() {
+    /**
+     * Gets all applicants in the system.
+     *
+     * @return list of applicants or null if there are no applicants in the
+     * system.
+     */
+    public List<PersonInterface> getAllApplicants() {
         List<PersonInterface> applicantes;
-        applicantes
-                = em.createNamedQuery("Person.findAll", PersonInterface.class
-                ).getResultList();
+        applicantes /*= em.createNamedQuery("Person.findAll", PersonInterface.class
+                ).getResultList();*/
+                = em.createNamedQuery("Person.findAllByRole", PersonInterface.class
+                ).setParameter("roleName", "APPLICANTS").getResultList();
 
         return applicantes;
+    }
+    
+    /**
+     * Gets all recruiters in the system.
+     *
+     * @return list of recruiters or null if there are no recruiters in the
+     * system.
+     */
+    public List<PersonInterface> getAllRecruiters() {
+        List<PersonInterface> recruiters;
+        recruiters /*= em.createNamedQuery("Person.findAllByRole", PersonInterface.class
+                ).setParameter("roleName", "RECRUITERS").getResultList();*/
+                =em.createNamedQuery("Person.findAll", PersonInterface.class
+                ).getResultList();
+                
+
+        return recruiters;
     }
 
     private String getEncryptedPassword(String clearTextPassword) {
