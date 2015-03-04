@@ -12,6 +12,7 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import se.kth.integration.CompetenceDAO;
+import se.kth.integration.DoesNotExistException;
 import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
 import se.kth.utility.logger.Log;
@@ -28,7 +29,7 @@ public class RecruiterController {
 
     @EJB
     private CompetenceDAO competenceDAO;
- /**
+/**
      *
      * @param nameEn Competence Name in English
      * @param nameSV Competence name in Swedish
@@ -40,13 +41,23 @@ public class RecruiterController {
             
         }
     }
+    
+    /**
+     * removes a competence
+     * @param comp the competence to be removed
+     * @throws DoesNotExistException
+     * @throws NullArgumentException 
+     */
+    public void removeCompetence(String comp) throws DoesNotExistException, NullArgumentException {
+        competenceDAO.removeCompetence(comp);
+    }
     /**
      *
      * @param lan  specify the which language
      * @return competences in specific language
      * 
      */
-    public List<CompetenceLangInterface> getComptences(String lan){
+    public List<CompetenceLangInterface> getCompetences(String lan) {
         if (lan != null){
             return competenceDAO.getCompetences(lan);
         }

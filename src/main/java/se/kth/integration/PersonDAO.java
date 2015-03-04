@@ -311,10 +311,8 @@ public class PersonDAO {
      */
     public List<PersonInterface> getAllApplicants() {
         List<PersonInterface> applicantes;
-        applicantes /*= em.createNamedQuery("Person.findAll", PersonInterface.class
-                 ).getResultList();*/
-                = em.createNamedQuery("Person.findAllByRole", PersonInterface.class
-                ).setParameter("roleName", "APPLICANTS").getResultList();
+        applicantes = em.createNamedQuery("Person.findAllByRole", PersonInterface.class)
+                .setParameter("roleName", "APPLICANTS").getResultList();
 
         return applicantes;
     }
@@ -327,10 +325,9 @@ public class PersonDAO {
      */
     public List<PersonInterface> getAllRecruiters() {
         List<PersonInterface> recruiters;
-        recruiters /*= em.createNamedQuery("Person.findAllByRole", PersonInterface.class
-                 ).setParameter("roleName", "RECRUITERS").getResultList();*/
-                = em.createNamedQuery("Person.findAll", PersonInterface.class
-                ).getResultList();
+        recruiters = em.createNamedQuery("Person.findAllByRole", PersonInterface.class)
+                .setParameter("roleName", "RECRUITERS").getResultList();
+
 
         return recruiters;
     }
