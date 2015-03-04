@@ -87,7 +87,7 @@ public class RecruiterManager implements Serializable {
 
     public List<String> getCompetence() {
         competence = new ArrayList<>();
-        for (CompetenceLangInterface c : recruiter.getComptences(languageManager.getLanguage())) {
+        for (CompetenceLangInterface c : recruiter.getCompetences(languageManager.getLanguage())) {
             competence.add(c.getName());
         }
         return competence;

@@ -152,7 +152,7 @@ public class PersonDAOTest {
 
 
     @Test
-    public void testRemoveApplicant() throws Exception {
+    public void testRemovePerson() throws Exception {
         String email = "email@kth.se";
         String password = "password";
         String firstname = "firstname";

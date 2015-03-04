@@ -102,7 +102,7 @@ public class CompetenceDAOTest {
         
         try{
            instance.removeCompetence(null);
-            Assert.fail("Should remove a null value ");
+            Assert.fail("Should not remove a null value ");
         } catch (NullArgumentException ex) {
             Assert.assertThat(ex.getMessage(), containsString("Null argument"));
         }

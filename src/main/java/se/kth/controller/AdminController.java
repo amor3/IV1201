@@ -6,16 +6,19 @@
 
 package se.kth.controller;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import se.kth.integration.DoesNotExistException;
 import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;
 import se.kth.integration.PersonDTO;
+import se.kth.model.PersonInterface;
 
 /**
  *
@@ -46,7 +49,19 @@ public class AdminController {
         }
         
     }
+    
+    public void removeRecruiter(String email) throws DoesNotExistException{
+        if(email != null){
+            try {
+                personDAO.removePerson(email);
+            } catch (NullArgumentException ex) {
+                Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
-    // TODO: Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public List<PersonInterface> getAllRecruiters(){
+        return personDAO.getAllRecruiters();
+    }
+
 }
