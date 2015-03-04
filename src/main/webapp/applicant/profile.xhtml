@@ -154,20 +154,27 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="textinput">Lösenord</label>
                                                         <div class="col-sm-10">
-                                                            <h:inputSecret value="#{applicantManager.newPassword}" validatorMessage="Lösenordets längd skall vara minst 6 tecken" class="form-control" id="newPassword" label="Fel">
+                                                            <p:password id="newPassword" 
+                                                                        value="#{applicantManager.newPassword}" 
+                                                                        match="newPasswordAgain" 
+                                                                        validatorMessage="Lösenordets längd skall vara minst 6 tecken och lösenorden du angivit skall vara identiska" 
+                                                                        styleClass="form-control">
                                                                 <f:validateLength minimum="6" />
-                                                            </h:inputSecret>
-                                                            <h:message for="newPassword" style="color:red" />
+                                                            </p:password>
+                                                            <p:message for="newPassword" style="color:red" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label class="col-sm-2 control-label" for="textinput">Lösenord igen</label>
                                                         <div class="col-sm-10">
-                                                            <h:inputSecret value="#{applicantManager.newPasswordAgain}" validatorMessage="Lösenordets längd skall vara minst 6 tecken" class="form-control" id="confirmPassword" label="Fel">
+                                                            <p:password id="newPasswordAgain" 
+                                                                        value="#{applicantManager.newPasswordAgain}" 
+                                                                        validatorMessage="Lösenordets längd skall vara minst 6 tecken och lösenorden du angivit skall vara identiska" 
+                                                                        styleClass="form-control">
                                                                 <f:validateLength minimum="6" />
-                                                            </h:inputSecret>
-                                                            <h:message for="confirmPassword" style="color:red" />
+                                                            </p:password>
+                                                            <p:message for="newPasswordAgain" style="color:red" />
                                                         </div>
                                                     </div>
 
