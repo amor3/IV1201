@@ -42,7 +42,7 @@ public class PersonDAO {
     private Person createPerson(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
         Person user = null;
         if (personDTO != null) {
-            if (personDTO.getEmail() != null && personDTO.getPassword()!= null) {
+            if (personDTO.getEmail() != null && personDTO.getPassword() != null) {
                 try {
                     user = em.createNamedQuery("Person.findByEmail", Person.class)
                             .setParameter("email", personDTO.getEmail())
@@ -67,6 +67,74 @@ public class PersonDAO {
             }
         }
         return user;
+    }
+
+    /**
+     * This method updates a existing user
+     * 
+     * @param personDTO 
+     * @return  
+     * @throws NullArgumentException 
+     */
+    public boolean updatePerson(PersonDTO personDTO) throws NullArgumentException {
+        Person user = null;
+        if (personDTO != null) {
+
+            try {
+                user = em.createNamedQuery("Person.findByEmail", Person.class)
+                        .setParameter("email", personDTO.getEmail())
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                return false;
+            }
+
+            if (user != null && personDTO.getFirstname() != null && personDTO.getSurname() != null && personDTO.getSsn() != null) {
+                user.setName(personDTO.getFirstname());
+                user.setSurname(personDTO.getSurname());
+                user.setSsn(personDTO.getSsn());
+
+                em.merge(user);
+                
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    
+    public boolean updatePersonCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain) throws NullArgumentException {
+        Person user = null;
+        if (email != null && oldPassword != null && newPassword != null && newPasswordAgain != null) {
+            try {
+                user = em.createNamedQuery("Person.findByEmail", Person.class)
+                        .setParameter("email", email)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                return false;
+            }
+            
+            // Test if old password in DB matches the input from user
+            boolean oldpasswordCheck = getEncryptedPassword( oldPassword ).equals(user.getPassword());
+
+            // Test if the new passwords are the same
+            boolean newPasswordMatches = newPassword.equals(newPasswordAgain);
+            
+            
+            if (oldpasswordCheck && newPasswordMatches) {
+                user.setPassword(getEncryptedPassword(newPassword));
+
+                em.merge(user);
+                
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private void addPersonToRole(Person person, String roleName) throws DoesNotExistException {
@@ -244,13 +312,13 @@ public class PersonDAO {
     public List<PersonInterface> getAllApplicants() {
         List<PersonInterface> applicantes;
         applicantes /*= em.createNamedQuery("Person.findAll", PersonInterface.class
-                ).getResultList();*/
+                 ).getResultList();*/
                 = em.createNamedQuery("Person.findAllByRole", PersonInterface.class
                 ).setParameter("roleName", "APPLICANTS").getResultList();
 
         return applicantes;
     }
-    
+
     /**
      * Gets all recruiters in the system.
      *
@@ -260,10 +328,9 @@ public class PersonDAO {
     public List<PersonInterface> getAllRecruiters() {
         List<PersonInterface> recruiters;
         recruiters /*= em.createNamedQuery("Person.findAllByRole", PersonInterface.class
-                ).setParameter("roleName", "RECRUITERS").getResultList();*/
-                =em.createNamedQuery("Person.findAll", PersonInterface.class
+                 ).setParameter("roleName", "RECRUITERS").getResultList();*/
+                = em.createNamedQuery("Person.findAll", PersonInterface.class
                 ).getResultList();
-                
 
         return recruiters;
     }

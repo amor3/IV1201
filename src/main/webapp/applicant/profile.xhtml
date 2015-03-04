@@ -4,7 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
     <h:head>
@@ -28,10 +29,18 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+        
+        <style type="text/css">
+            .ui-growl{
+                top:60px;
+            }
+        </style>
     </h:head>
 
     <h:body>
-
+        
+        <p:growl id="growl" showDetail="true" />  
+         
         <ui:include src="../nav_backend.xhtml"></ui:include>
 
         <div id="wrapper">
@@ -166,7 +175,7 @@
                                                         <div class="col-sm-offset-2 col-sm-10">
                                                             <div class="pull-right">
                                                                 <button style="margin:5px;" type="submit" class="btn btn-default">Avbryt</button>
-                                                                <h:commandButton style="margin:5px;" type="submit" value="Spara" action="#{userManagedBean.savePasswordChange()}" class="btn btn-primary"/>
+                                                                <h:commandButton style="margin:5px;" type="submit" value="Spara" action="#{applicantManager.saveUserCredentials()}" class="btn btn-primary"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,6 +195,8 @@
 
 
                                                 </fieldset>
+                                                
+                                                
                                             </h:form>
                                         </div><!-- /.col-lg-12 -->
 

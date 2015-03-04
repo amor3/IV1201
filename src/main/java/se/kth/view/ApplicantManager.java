@@ -7,8 +7,15 @@ package se.kth.view;
 
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import se.kth.controller.ApplicantController;
 
 /**
  *
@@ -19,7 +26,6 @@ import javax.faces.bean.ViewScoped;
 public class ApplicantManager implements Serializable {
 
     // Profile page
-
     private String firstname;
     private String lastname;
     private String ssn;
@@ -33,25 +39,53 @@ public class ApplicantManager implements Serializable {
     // Passing messages to the view
     private String meddelande;
 
+    @EJB
+    private ApplicantController applicantCTRL;
+
     @PostConstruct
     public void init() {
     }
 
-    
-    public void saveUserProfile(){
+    public void saveUserProfile() {
+        boolean status = applicantCTRL.saveUserProfile(email, firstname, lastname, ssn);
         
-    } 
-    
-    public void saveUserCredentials(){
-    
+        if (status) {
+            addMessage("Success", "Saved profile");
+        } else {
+            addMessage("Error", "Could not save profile");
+        }
     }
-            
 
-            
-            
-            
-            
-            
+    public void saveUserCredentials() {
+        boolean status = applicantCTRL.saveUserCredentials(email, oldPassword, newPassword, newPasswordAgain);
+
+        if (status) {
+            addMessage("Success", "Updated credentials");
+        } else {
+            addMessage("Error", "Could not update credentials, check your passwords.");
+        }
+    }
+
+    public String loggout() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+
+        try {
+            request.logout();
+            // clear the session
+            ((HttpSession) context.getExternalContext().getSession(false)).invalidate();
+
+        } catch (ServletException ex) {
+            ex.printStackTrace();
+        } finally {
+            return "/index?faces-redirect=true";
+        }
+    }
+
+    public void addMessage(String subject, String message) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(subject, message));
+    }
 
     public String getMeddelande() {
         return meddelande;
@@ -62,6 +96,7 @@ public class ApplicantManager implements Serializable {
     }
 
     public String getFirstname() {
+        this.firstname = applicantCTRL.getLoggedInPerson().getName();
         return firstname;
     }
 
@@ -70,6 +105,7 @@ public class ApplicantManager implements Serializable {
     }
 
     public String getLastname() {
+        this.lastname = applicantCTRL.getLoggedInPerson().getSurname();
         return lastname;
     }
 
@@ -78,6 +114,7 @@ public class ApplicantManager implements Serializable {
     }
 
     public String getSsn() {
+        this.ssn = applicantCTRL.getLoggedInPerson().getSsn();
         return ssn;
     }
 
@@ -86,6 +123,7 @@ public class ApplicantManager implements Serializable {
     }
 
     public String getEmail() {
+        this.email = applicantCTRL.getLoggedInPerson().getEmail();
         return email;
     }
 
