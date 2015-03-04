@@ -37,6 +37,10 @@ public class PersonDTO {
         this.availableTo = availableTo;
         this.competences = competences;
     }
+    
+    public PersonDTO(String email){
+        this.email = email;
+    }
 
     public String getEmail() {
         return email;

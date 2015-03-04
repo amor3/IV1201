@@ -37,6 +37,7 @@ public class RecruiterController {
     public void creatCompetence(String nameEN, String nameSV) throws DuplicateEntryException, NullArgumentException {
         if (nameEN != null && nameSV != null) {
             competenceDAO.creatCompetenc(nameEN, nameSV);
+            
         }
     }
     /**
