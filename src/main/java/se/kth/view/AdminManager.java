@@ -9,8 +9,11 @@ package se.kth.view;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import se.kth.controller.AdminController;
+import se.kth.integration.DuplicateEntryException;
 
 /**
  *
@@ -40,7 +43,11 @@ public class AdminManager implements Serializable {
     }
     
     public void creatRecruiter(){
-        adminController.createRecriuter(email);
+        try {
+            adminController.createRecriuter(email);
+        } catch (DuplicateEntryException ex) {
+            Logger.getLogger(AdminManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
     
 }
