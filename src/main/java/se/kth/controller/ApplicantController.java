@@ -46,7 +46,7 @@ public class ApplicantController {
     }
     
     
-    public boolean saveUserProfile(String email, String firstname, String lastname, String ssn){
+    public boolean saveUserProfile(String email, String firstname, String lastname, String ssn) throws DoesNotExistException {
         PersonDTO personDTO = new PersonDTO();
         personDTO.setEmail(email);
         personDTO.setFirstname(firstname);
@@ -54,15 +54,15 @@ public class ApplicantController {
         personDTO.setSsn(ssn);
         boolean success = false;
         try {
-            success = personDAO.updatePerson(personDTO);
+            personDAO.updatePerson(personDTO);
+            success = true;
         } catch (NullArgumentException ex) {
-            // TODO: Add popup to xhtml
             Logger.getLogger(ApplicantController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return success;
     }
     
-    public boolean saveUserCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain){
+    public boolean saveUserCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain) throws DoesNotExistException{
         boolean success = false;
         try {
             success = personDAO.updatePersonCredentials(email, oldPassword, newPassword, newPasswordAgain);

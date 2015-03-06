@@ -4,6 +4,7 @@ package se.kth.controller;
 
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,18 +57,19 @@ public class OpenControllerTest {
         String firstname = "firstname";
         String surname = "surname";
         String ssn = "191900001111";
-        Date availableFrom = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+        Date availableFrom =  ft.parse("2015-02-02");
         Date availableTo = new Date();
         List<CompetenceProfileDTO> competences = new ArrayList<>();
         competences.add(new CompetenceProfileDTO("competence1", BigDecimal.ONE));
         competences.add(new CompetenceProfileDTO("competence2", BigDecimal.ONE));
         competences.add(new CompetenceProfileDTO("competence2", BigDecimal.ONE));
-         utx.begin();
-        int oldSize = personDAOinstance.getAllApplicants().size();
+        utx.begin();
+        int oldSize = personDAOinstance.getAllPersons("APPLICANTS").size();
 
         instance.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
         
-        Assert.assertEquals(oldSize + 1, personDAOinstance.getAllApplicants().size());
+        Assert.assertEquals(oldSize + 1, personDAOinstance.getAllPersons("APPLICANTS").size());
         
         try{
             instance.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
@@ -91,7 +93,7 @@ public class OpenControllerTest {
         }
         
         personDAOinstance.removePerson(email);
-         utx.commit();
+        utx.commit();
     }
     
 }

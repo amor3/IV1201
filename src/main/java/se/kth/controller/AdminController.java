@@ -61,7 +61,7 @@ public class AdminController {
     }
 
     public List<PersonInterface> getAllRecruiters(){
-        return personDAO.getAllRecruiters();
+        return personDAO.getAllPersons("RECRUITERS");
     }
 
 }
