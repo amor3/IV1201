@@ -70,42 +70,51 @@ public class PersonDAO {
     }
 
     /**
-     * This method updates a existing user
-     * 
-     * @param personDTO 
-     * @return  
-     * @throws NullArgumentException 
+     * This method updates an existing user
+     *
+     * @param personDTO containing the new information to be merged
+     * @throws NullArgumentException
+     * @throws DoesNotExistException
      */
-    public boolean updatePerson(PersonDTO personDTO) throws NullArgumentException {
+    public void updatePerson(PersonDTO personDTO) throws NullArgumentException, DoesNotExistException {
         Person user = null;
         if (personDTO != null) {
+            if (personDTO.getEmail() != null) {
+                try {
+                    user = em.createNamedQuery("Person.findByEmail", Person.class)
+                            .setParameter("email", personDTO.getEmail())
+                            .getSingleResult();
+                } catch (NoResultException e) {
+                    throw new DoesNotExistException("user does not exist.");
+                }
 
-            try {
-                user = em.createNamedQuery("Person.findByEmail", Person.class)
-                        .setParameter("email", personDTO.getEmail())
-                        .getSingleResult();
-            } catch (NoResultException e) {
-                return false;
-            }
+                if (user != null && personDTO.getFirstname() != null && personDTO.getSurname() != null && personDTO.getSsn() != null) {
+                    user.setName(personDTO.getFirstname());
+                    user.setSurname(personDTO.getSurname());
+                    user.setSsn(personDTO.getSsn());
 
-            if (user != null && personDTO.getFirstname() != null && personDTO.getSurname() != null && personDTO.getSsn() != null) {
-                user.setName(personDTO.getFirstname());
-                user.setSurname(personDTO.getSurname());
-                user.setSsn(personDTO.getSsn());
+                    em.merge(user);
 
-                em.merge(user);
-                
-                return true;
-            } else {
-                return false;
+                } else {
+                    throw new NullArgumentException("Null argument Firstname/Surname/Ssn");
+                }
             }
         } else {
-            return false;
+            throw new NullArgumentException("Null argument personDTO");
         }
     }
-    
-    
-    public boolean updatePersonCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain) throws NullArgumentException {
+
+    /**
+     * updates users credentials
+     *
+     * @param email of the user whose credentials are to be updated
+     * @param oldPassword
+     * @param newPassword
+     * @param newPasswordAgain
+     * @return true if the operation is successful false otherwise
+     * @throws NullArgumentException
+     */
+    public boolean updatePersonCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain) throws NullArgumentException, DoesNotExistException {
         Person user = null;
         if (email != null && oldPassword != null && newPassword != null && newPasswordAgain != null) {
             try {
@@ -113,27 +122,26 @@ public class PersonDAO {
                         .setParameter("email", email)
                         .getSingleResult();
             } catch (NoResultException e) {
-                return false;
+                throw new DoesNotExistException("user does not exist.");
             }
-            
+
             // Test if old password in DB matches the input from user
-            boolean oldpasswordCheck = getEncryptedPassword( oldPassword ).equals(user.getPassword());
+            boolean oldpasswordCheck = getEncryptedPassword(oldPassword).equals(user.getPassword());
 
             // Test if the new passwords are the same
             boolean newPasswordMatches = newPassword.equals(newPasswordAgain);
-            
-            
+
             if (oldpasswordCheck && newPasswordMatches) {
                 user.setPassword(getEncryptedPassword(newPassword));
 
                 em.merge(user);
-                
+
                 return true;
             } else {
                 return false;
             }
         } else {
-            return false;
+            throw new NullArgumentException("Null argument email/oldPassword/newPassword/newPasswordAgain");
         }
     }
 
@@ -147,12 +155,18 @@ public class PersonDAO {
         }
     }
 
-    private void addAvailability(Person person, PersonDTO personDTO) {
-        if (personDTO.getAvailableFrom().before(personDTO.getAvailableTo())) {
-            Availability availability = new Availability(person);
-            availability.setFromDate(personDTO.getAvailableFrom());
-            availability.setToDate(personDTO.getAvailableTo());
-            em.persist(availability);
+    private void addAvailability(Person person, PersonDTO personDTO) throws NullArgumentException {
+        if (personDTO.getAvailableFrom() != null && personDTO.getAvailableTo() != null) {
+            if (personDTO.getAvailableFrom().before(personDTO.getAvailableTo())) {
+                Availability availability = new Availability(person);
+                availability.setFromDate(personDTO.getAvailableFrom());
+                availability.setToDate(personDTO.getAvailableTo());
+                em.persist(availability);
+            } else {
+                throw new IllegalArgumentException("From date not before to date");
+            }
+        } else {
+            throw new NullArgumentException("Null argument AvailableFrom/AvailableTo");
         }
     }
 
@@ -162,41 +176,44 @@ public class PersonDAO {
         Competence competenceId;
         CompetenceProfile competenceProfile;
 
-        for (CompetenceProfileDTO comp : personDTO.getCompetences()) {
-            try {
-                compEn = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class)
-                        .setParameter("name", comp.getName())
-                        .getSingleResult();
-            } catch (NoResultException e) {
+        if (personDTO.getCompetences() != null) {
 
-            }
-            if (compEn == null) {
+            for (CompetenceProfileDTO comp : personDTO.getCompetences()) {
                 try {
-                    compSv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class)
+                    compEn = em.createNamedQuery("CompetenceEn.findByName", CompetenceEn.class)
                             .setParameter("name", comp.getName())
                             .getSingleResult();
                 } catch (NoResultException e) {
 
                 }
-                if (compSv == null) {
-                    System.out.println("No such competence");
-                    return;
+                if (compEn == null) {
+                    try {
+                        compSv = em.createNamedQuery("CompetenceSv.findByName", CompetenceSv.class)
+                                .setParameter("name", comp.getName())
+                                .getSingleResult();
+                    } catch (NoResultException e) {
+
+                    }
+                    if (compSv == null) {
+                        System.out.println("No such competence");
+                        return;
+                    } else {
+                        competenceId = compSv.getCompetenceId();
+                    }
                 } else {
-                    competenceId = compSv.getCompetenceId();
+                    competenceId = compEn.getCompetenceId();
                 }
-            } else {
-                competenceId = compEn.getCompetenceId();
+
+                competenceId = em.find(Competence.class, competenceId.getCompetenceId());
+                em.refresh(person);
+                competenceProfile = new CompetenceProfile(competenceId, person);
+                if (!person.getCompetenceProfileCollection().contains(competenceProfile)) {
+
+                    competenceProfile.setYearsOfExperience(comp.getYearsOfExperience());
+                    em.persist(competenceProfile);
+                }
+
             }
-
-            competenceId = em.find(Competence.class, competenceId.getCompetenceId());
-            em.refresh(person);
-            competenceProfile = new CompetenceProfile(competenceId, person);
-            if (!person.getCompetenceProfileCollection().contains(competenceProfile)) {
-
-                competenceProfile.setYearsOfExperience(comp.getYearsOfExperience());
-                em.persist(competenceProfile);
-            }
-
         }
     }
 
@@ -309,27 +326,12 @@ public class PersonDAO {
      * @return list of applicants or null if there are no applicants in the
      * system.
      */
-    public List<PersonInterface> getAllApplicants() {
+    public List<PersonInterface> getAllPersons(String role) {
         List<PersonInterface> applicantes;
         applicantes = em.createNamedQuery("Person.findAllByRole", PersonInterface.class)
-                .setParameter("roleName", "APPLICANTS").getResultList();
+                .setParameter("roleName", role).getResultList();
 
         return applicantes;
-    }
-
-    /**
-     * Gets all recruiters in the system.
-     *
-     * @return list of recruiters or null if there are no recruiters in the
-     * system.
-     */
-    public List<PersonInterface> getAllRecruiters() {
-        List<PersonInterface> recruiters;
-        recruiters = em.createNamedQuery("Person.findAllByRole", PersonInterface.class)
-                .setParameter("roleName", "RECRUITERS").getResultList();
-
-
-        return recruiters;
     }
 
     private String getEncryptedPassword(String clearTextPassword) {

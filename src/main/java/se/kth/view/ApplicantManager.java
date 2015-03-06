@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import se.kth.controller.ApplicantController;
+import se.kth.integration.DoesNotExistException;
 
 /**
  *
@@ -47,8 +48,12 @@ public class ApplicantManager implements Serializable {
     }
 
     public void saveUserProfile() {
-        boolean status = applicantCTRL.saveUserProfile(email, firstname, lastname, ssn);
-        
+        boolean status = false;
+        try {
+            status = applicantCTRL.saveUserProfile(email, firstname, lastname, ssn);
+        } catch (DoesNotExistException ex) {
+            addMessage("Error", "User does not exist");
+        }
         if (status) {
             addMessage("Success", "Saved profile");
         } else {
@@ -57,7 +62,12 @@ public class ApplicantManager implements Serializable {
     }
 
     public void saveUserCredentials() {
-        boolean status = applicantCTRL.saveUserCredentials(email, oldPassword, newPassword, newPasswordAgain);
+        boolean status = false;
+        try {
+            status = applicantCTRL.saveUserCredentials(email, oldPassword, newPassword, newPasswordAgain);
+        } catch (DoesNotExistException ex) {
+            addMessage("Error", "User does not exist");
+        }
 
         if (status) {
             addMessage("Success", "Updated credentials");

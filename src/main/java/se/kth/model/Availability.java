@@ -78,6 +78,7 @@ public class Availability implements Serializable, AvailabilityInterface {
         this.availabilityId = availabilityId;
     }
 
+    @Override
     public Date getFromDate() {
         return fromDate;
     }
@@ -86,6 +87,7 @@ public class Availability implements Serializable, AvailabilityInterface {
         this.fromDate = fromDate;
     }
 
+    @Override
     public Date getToDate() {
         return toDate;
     }
