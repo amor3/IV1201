@@ -3,14 +3,10 @@
  * All rights reserved.
  * 
  */
-
-
 package se.kth.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,6 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email"),
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password")})
 public class Person implements Serializable, PersonInterface {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -72,7 +69,7 @@ public class Person implements Serializable, PersonInterface {
     private String password;
     @ManyToMany(mappedBy = "personCollection")
     private Collection<Role> roleCollection;
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<CompetenceProfile> competenceProfileCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "personId")
     private Collection<Availability> availabilityCollection;
@@ -170,7 +167,7 @@ public class Person implements Serializable, PersonInterface {
     public void setAvailabilityCollection(Collection<Availability> availabilityCollection) {
         this.availabilityCollection = availabilityCollection;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -195,5 +192,15 @@ public class Person implements Serializable, PersonInterface {
     public String toString() {
         return "se.kth.model.Person[ personId=" + personId + " ]";
     }
-    
+
+    @Override
+    public String getCompetencesToString() {
+        String competencesToString = "";
+
+        for (CompetenceProfile competenceProfile : getCompetenceProfileCollection()) {
+            competencesToString += " " + competenceProfile.getCompetenceId().getCompetenceSv().getName();
+        }
+        return competencesToString;
+    }
+
 }
