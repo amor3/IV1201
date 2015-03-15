@@ -203,7 +203,7 @@
                                                     </p:column>
 
                                                     <p:column headerText="PDF" styleClass="text-center">
-                                                        <button onclick="skapaPDF('firstname', 'surname', 'email', 'ssn', 'kompetence')"><i class="fa fa-file-pdf-o fa-2x"></i></button>
+                                                        <button onclick="skapaPDF('#{applicants.name}', '#{applicants.surname}', '#{applicants.email}', '#{applicants.ssn}', '#{applicants.competencesToString}')"><i class="fa fa-file-pdf-o fa-2x"></i></button>
                                                     </p:column>
 
 
