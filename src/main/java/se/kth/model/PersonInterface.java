@@ -21,5 +21,6 @@ public interface PersonInterface {
     public String getPassword();
     public Collection<Availability> getAvailabilityCollection();
     public Collection<CompetenceProfile> getCompetenceProfileCollection();
+    public String getCompetencesToString();
 
 }

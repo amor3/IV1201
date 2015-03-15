@@ -1,26 +1,149 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
     <f:view locale="#{languageManager.locale}">
+
         <h:head>
-            <title>Create competence</title>
+            <title>Blåa lund</title>
+
+            <!-- Latest compiled and minified CSS -->
+            <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+
+
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+            <!-- Custom CSS -->
+            <h:outputStylesheet library="css" name="sb-admin.css"  />
+
+            <!-- Custom Fonts -->
+            <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+
+            <!-- Script Libs -->
+            <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+
+            <style type="text/css">
+                .ui-growl{
+                    top:60px;
+                }
+            </style>
         </h:head>
+
         <h:body>
+
             <h>#{languageManager.language}</h>
-            <h:form>
-                <h:panelGrid id="grid" columns="3" cellpadding="5">
-                    <h:outputText value="English: " />
-                    <p:inputText id="competenceEN" value="#{recruiterManager.competenceManager.competenceEN}" />
-                    <p:message id="message1" for="competenceEN" style="color:red" display="text" />
-                    <h:outputText value="Swedish: " />
-                    <p:inputText id="competenceSV" value="#{recruiterManager.competenceManager.competenceSV}"/>
-                    <p:message id="message2" for="competenceSV" style="color:red" display="text" />
-                </h:panelGrid>
-                <p:commandButton value="Create" action="#{recruiterManager.creatCompetence()}" update="grid"/>
-            </h:form>
+
+
+            <ui:include src="../nav_backend.xhtml"></ui:include>
+
+            <div id="wrapper">
+
+                <div id="page-wrapper">
+
+                    <div class="container-fluid">
+
+                        <!-- Page Heading -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h1 class="page-header">
+                                    Skapa nya kompetenser
+                                </h1>
+                                <ol class="breadcrumb">
+                                    <li class="active">
+                                        <i class="fa fa-dashboard"></i> Kontrollpanel
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Kompetensen</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p:growl id="growl" showDetail="true" />  
+
+                                                <h:form class="form-horizontal" role="form">
+                                                    <fieldset>
+                                                        <!-- Text input-->
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" for="textinput">Svenska</label>
+                                                            <div class="col-sm-10">
+                                                                <p:inputText id="competenceSV" value="#{recruiterManager.competenceManager.competenceSV}"/>
+                                                                <p:message id="message2" for="competenceSV" style="color:red" display="text" />
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Text input-->
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" for="textinput">Engelska</label>
+                                                            <div class="col-sm-10">
+                                                                <p:inputText id="competenceEN" value="#{recruiterManager.competenceManager.competenceEN}" />
+                                                                <p:message id="message1" for="competenceEN" style="color:red" display="text" />
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-2 col-sm-10">
+                                                                <div class="pull-right">
+                                                                    <button type="submit" style="margin:5px;" class="btn btn-default">Avbryt</button>
+                                                                    <p:commandButton style="margin:5px;" styleClass="btn btn-primary" value="Skapa" action="#{recruiterManager.creatCompetence()}" update=":growl"/>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                </h:form>
+                                            </div><!-- /.col-lg-12 -->
+
+                                        </div><!-- /.row -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+                        <!-- /.row --> 
+
+
+
+
+
+                    </div>
+                    <!-- /.container-fluid -->
+
+                </div>
+                <!-- /#page-wrapper -->
+
+            </div>
+            <!-- /#wrapper -->
+
+
         </h:body>
     </f:view>
 </html>

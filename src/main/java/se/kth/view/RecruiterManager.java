@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import se.kth.controller.RecruiterController;
 import se.kth.integration.DuplicateEntryException;
@@ -76,12 +78,14 @@ public class RecruiterManager implements Serializable {
         if (competenceManager.getCompetenceEN() != null && competenceManager.getCompetenceSV() != null) {
             try {
                 recruiter.creatCompetence(competenceManager.getCompetenceEN(), competenceManager.getCompetenceSV());
+                addMessage("Success", "Competence successfully added.");
             } catch (DuplicateEntryException ex) {
-                //TODO: popup message competence alrady exists
+                addMessage("Error", "Competence already exists.");
             } catch (NullArgumentException ex) {
                 Logger.getLogger(RecruiterManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         return "";
     }
 
@@ -101,4 +105,11 @@ public class RecruiterManager implements Serializable {
         this.email = email;
     }
 
+    
+    
+        public void addMessage(String subject, String message) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(subject, message));
+    }
+    
 }

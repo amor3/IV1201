@@ -15,8 +15,10 @@ import se.kth.integration.CompetenceDAO;
 import se.kth.integration.DoesNotExistException;
 import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
+import se.kth.integration.PersonDAO;
 import se.kth.utility.logger.Log;
 import se.kth.model.CompetenceLangInterface;
+import se.kth.model.PersonInterface;
 
 /**
  *
@@ -29,7 +31,12 @@ public class RecruiterController {
 
     @EJB
     private CompetenceDAO competenceDAO;
-/**
+    
+    @EJB
+    private PersonDAO personDAO;
+    
+    
+    /**
      *
      * @param nameEn Competence Name in English
      * @param nameSV Competence name in Swedish
@@ -64,4 +71,12 @@ public class RecruiterController {
       return null;  
     }
 
+    public List<PersonInterface> getApplicants(){
+        return personDAO.getAllPersons("APPLICANTS");
+    }
+    
+    
+    
+    
+    
 }

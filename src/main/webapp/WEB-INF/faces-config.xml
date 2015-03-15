@@ -23,39 +23,39 @@
     
     
     <navigation-rule>
-	<from-view-id>registration/register_two.xhtml</from-view-id>
+	<from-view-id>/registration/register_two.xhtml</from-view-id>
         <navigation-case>
 		<from-action>#{registrationManager.gotoPage1}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>registration/register.xhtml</to-view-id>
+		<to-view-id>/registration/register.xhtml</to-view-id>
                 <redirect />
 	</navigation-case>
         <navigation-case>
 		<from-action>#{registrationManager.gotoPage3}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>registration/register_three.xhtml</to-view-id>
+		<to-view-id>/registration/register_three.xhtml</to-view-id>
                 <redirect />
 	</navigation-case> 
     </navigation-rule>
     
     <navigation-rule>
-	<from-view-id>registration/register_three.xhtml</from-view-id>
+	<from-view-id>/registration/register_three.xhtml</from-view-id>
         <navigation-case>
 		<from-action>#{registrationManager.gotoPage2}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>registration/register_two.xhtml</to-view-id>
+		<to-view-id>/registration/register_two.xhtml</to-view-id>
                 <redirect />
 	</navigation-case>
         <navigation-case>
 		<from-action>#{registrationManager.gotoPageFinal}</from-action>
 		<from-outcome>success</from-outcome>
-		<to-view-id>registration/register_final.xhtml</to-view-id>
+		<to-view-id>/registration/register_final.xhtml</to-view-id>
                 <redirect />
 	</navigation-case> 
     </navigation-rule>
         
                
-                
+                 
                  
                   
                    
