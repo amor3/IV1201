@@ -38,7 +38,7 @@ public class PersonDAO {
 
     @PersistenceContext(unitName = "RDB_PU")
     private EntityManager em;
-
+    
     private Person createPerson(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
         Person user = null;
         if (personDTO != null) {

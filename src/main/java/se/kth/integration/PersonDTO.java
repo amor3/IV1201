@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author AMore
+ * contains several constructors of person DTOs
+ * that can get several parameters, such as email, password
+ * first and surname with social security number and availability dates
+ * 
  */
 public class PersonDTO {
 

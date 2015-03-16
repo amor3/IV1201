@@ -15,7 +15,14 @@ import java.util.Date;
 public class AvailabilityDTO {
     private Date from;
     private Date to;
-
+    
+    /**
+     * Register the availability of 
+     * an applicant.
+     * 
+     * @param from
+     * @param to 
+     */
     public AvailabilityDTO(Date from, Date to) {
         this.from = from;
         this.to = to;

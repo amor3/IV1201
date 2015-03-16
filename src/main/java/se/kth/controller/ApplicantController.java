@@ -31,7 +31,11 @@ public class ApplicantController {
     private PersonDAO personDAO;
     
     
-    
+    /**
+     *  Gets a user who is logged in
+     * 
+     * @return Person 
+     */
     public Person getLoggedInPerson(){
         String email = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
         
@@ -45,7 +49,17 @@ public class ApplicantController {
         return person;
     }
     
-    
+    /**
+     * Save the user's profile after creating or
+     * changing it.
+     * 
+     * @param email
+     * @param firstname
+     * @param lastname
+     * @param ssn
+     * @return ture if saving is succeeded, false if not
+     * @throws DoesNotExistException 
+     */
     public boolean saveUserProfile(String email, String firstname, String lastname, String ssn) throws DoesNotExistException {
         PersonDTO personDTO = new PersonDTO();
         personDTO.setEmail(email);
@@ -61,7 +75,17 @@ public class ApplicantController {
         }
         return success;
     }
-    
+    /**
+     * Save user's credentials when creating or 
+     * changing.
+     * 
+     * @param email
+     * @param oldPassword
+     * @param newPassword
+     * @param newPasswordAgain
+     * @return true if succeed, false if not.
+     * @throws DoesNotExistException 
+     */
     public boolean saveUserCredentials(String email, String oldPassword, String newPassword, String newPasswordAgain) throws DoesNotExistException{
         boolean success = false;
         try {

@@ -36,7 +36,9 @@ public class LanguageManager implements Serializable {
         return locale.getLanguage();
     }
 
-
+    /**
+     * change language between SV and EN
+     */
     public void changeLanguage() {
         this.locale = new Locale(getLanguageCode());
         FacesContext.getCurrentInstance().getViewRoot().setLocale(this.locale);

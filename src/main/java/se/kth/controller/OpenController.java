@@ -28,7 +28,15 @@ public class OpenController {
 
     @EJB
     private PersonDAO personDAO;
-
+    
+    /**
+     * Create an applicant
+     * with all information given by the user.
+     * 
+     * @param personDTO
+     * @throws DuplicateEntryException
+     * @throws NullArgumentException 
+     */
     public void createApplicant(PersonDTO personDTO) throws DuplicateEntryException, NullArgumentException {
         personDAO.createApplicant(personDTO);
     }

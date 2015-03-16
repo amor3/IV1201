@@ -41,7 +41,10 @@ public class AdminManager implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+    /**
+     * create a new recruiter by calling 
+     * admin controller's creatRecruiter's method
+     */
     public void creatRecruiter(){
         try {
             adminController.createRecriuter(email);

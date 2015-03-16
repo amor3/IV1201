@@ -73,7 +73,11 @@ public class RecruiterManager implements Serializable {
     public void setAvailabilityManager(AvailabilityManager availabilityManager) {
         this.availabilityManager = availabilityManager;
     }
-
+    /**
+     * Create a competence
+     * 
+     * @return true if creating competence succeeded, and false if not.
+     */
     public String creatCompetence() {
         if (competenceManager.getCompetenceEN() != null && competenceManager.getCompetenceSV() != null) {
             try {

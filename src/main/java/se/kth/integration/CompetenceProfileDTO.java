@@ -10,14 +10,15 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- *
- * @author AMore
+ * constructors that can get several parameters such as name
+ * or both name and years of experience.
+ * 
  */
 public class CompetenceProfileDTO {
 
     private String name;
     private BigDecimal yearsOfExperience;
-
+    
     public CompetenceProfileDTO(String name, BigDecimal yearsOfExperience) {
         this.name = name;
         this.yearsOfExperience = yearsOfExperience;

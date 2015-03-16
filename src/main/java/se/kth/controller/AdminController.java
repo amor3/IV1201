@@ -38,7 +38,7 @@ public class AdminController {
      * @param email 
      * @throws se.kth.integration.DuplicateEntryException 
      */
-    
+   
     public void createRecriuter(String email) throws DuplicateEntryException{
         if(email != null){
             try {
@@ -49,7 +49,13 @@ public class AdminController {
         }
         
     }
-    
+   /**
+    * Remove a recruiter by specifying 
+    * the email, sending it as a parameter.
+    * 
+    * @param email
+    * @throws DoesNotExistException 
+    */
     public void removeRecruiter(String email) throws DoesNotExistException{
         if(email != null){
             try {
@@ -59,7 +65,12 @@ public class AdminController {
             }
         }
     }
-
+    /**
+     * Get all Recruiters whom are 
+     * registered in the System
+     * 
+     * @return list of all recruiters in the system
+     */
     public List<PersonInterface> getAllRecruiters(){
         return personDAO.getAllPersons("RECRUITERS");
     }

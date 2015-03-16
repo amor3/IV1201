@@ -142,7 +142,11 @@ public class RegistrationManager implements Serializable {
     public String gotoPage3() {
         return "success";
     }
-
+    /**
+     * send the user to the final page
+     * 
+     * @return success if succeeded
+     */
     public String gotoPageFinal() {
         PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, droppableCManager.getDroppedCompetences());
         try {
