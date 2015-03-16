@@ -67,7 +67,6 @@ public class ApplicantController {
         try {
             success = personDAO.updatePersonCredentials(email, oldPassword, newPassword, newPasswordAgain);
         } catch (NullArgumentException ex) {
-            // TODO: Add popup to xhtml
             Logger.getLogger(ApplicantController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return success;

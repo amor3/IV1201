@@ -23,6 +23,7 @@ import se.kth.integration.CompetenceProfileDTO;
 import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;
+import se.kth.integration.PersonDTO;
 
 
 /**
@@ -66,28 +67,31 @@ public class OpenControllerTest {
         competences.add(new CompetenceProfileDTO("competence2", BigDecimal.ONE));
         utx.begin();
         int oldSize = personDAOinstance.getAllPersons("APPLICANTS").size();
-
-        instance.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
+        PersonDTO personDTO = new PersonDTO(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
+        instance.createApplicant(personDTO);
         
         Assert.assertEquals(oldSize + 1, personDAOinstance.getAllPersons("APPLICANTS").size());
         
         try{
-            instance.createApplicant(email, password, firstname, surname, ssn, availableFrom, availableTo, competences);
+            instance.createApplicant(personDTO);
             Assert.fail("Should not add duplicate values");
         }catch (DuplicateEntryException ex) {
             Assert.assertThat(ex.getMessage(), containsString("Person alrady exist."));
         }
         
+        personDTO.setPassword(null);
         try{
-            instance.createApplicant(null, password, firstname, surname, ssn, availableFrom, availableTo, competences);
-            Assert.fail("Should not add a person with no email");
+            instance.createApplicant(personDTO);
+            Assert.fail("Should not add a person with no password");
         } catch(NullArgumentException ex) {
             Assert.assertThat(ex.getMessage(), containsString("Null argument personDTO.email/personDTO.password"));
         }
         
+        personDTO.setEmail(null);
+        personDTO.setPassword("password");
         try{
-            instance.createApplicant(email, null, firstname, surname, ssn, availableFrom, availableTo, competences);
-            Assert.fail("Should not add a person with no password");
+            instance.createApplicant(personDTO);
+            Assert.fail("Should not add a person with no email");
         } catch(NullArgumentException ex) {
             Assert.assertThat(ex.getMessage(), containsString("Null argument personDTO.email/personDTO.password"));
         }
