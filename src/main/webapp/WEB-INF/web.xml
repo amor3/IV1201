@@ -9,6 +9,7 @@
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -32,8 +33,6 @@
         <param-value>true</param-value>
     </context-param>
     
-    
-
     
     <security-constraint>
         <display-name>AdminConstraint</display-name>
