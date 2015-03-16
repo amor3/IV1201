@@ -9,6 +9,8 @@ package se.kth.controller;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import se.kth.integration.CompetenceDAO;
 import se.kth.model.CompetenceLangInterface;
 
@@ -16,6 +18,7 @@ import se.kth.model.CompetenceLangInterface;
  *
  * @author AMore
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class CompetenceController {
 
