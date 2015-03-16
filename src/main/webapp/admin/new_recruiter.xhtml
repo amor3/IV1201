@@ -44,11 +44,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Skapa nya rekryterare
+                                #{messages.CreateNewRecruiterTitle}
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-dashboard"></i> Kontrollpanel
+                                    <i class="fa fa-dashboard"></i> #{messages.ControlpanelTitle}
                                 </li>
                             </ol>
                         </div>
@@ -59,7 +59,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Rekryterarens epost</h3>
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>#{messages.RecruitersEmailTitle}</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -68,7 +68,7 @@
                                                 <fieldset>
                                                     <!-- Text input-->
                                                     <div class="form-group">
-                                                        <label class="col-sm-2 control-label" for="textinput">E-post</label>
+                                                        <label class="col-sm-2 control-label" for="textinput">#{messages.E-mail}</label>
                                                         <div class="col-sm-10">
                                                             <h:inputText value="#{adminManager.email}" class="form-control"/>
                                                         </div>
@@ -81,8 +81,8 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
                                                             <div class="pull-right">
-                                                                <button type="submit" style="margin:5px;" class="btn btn-default">Avbryt</button>
-                                                                <h:commandButton style="margin:5px;" type="submit" value="Skapa" action="#{adminManager.creatRecruiter()}" class="btn btn-primary"/>
+                                                                <button type="submit" style="margin:5px;" class="btn btn-default">#{messages.CancelButton}</button>
+                                                                <h:commandButton style="margin:5px;" type="submit" value="#{messages.CreateButton}" action="#{adminManager.creatRecruiter()}" class="btn btn-primary"/>
                                                             </div>
                                                         </div>
                                                     </div>

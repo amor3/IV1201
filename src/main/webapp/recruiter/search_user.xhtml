@@ -118,11 +118,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Sök <small>bland rekryter</small>
+                                #{messages.Search} <small>#{messages.AmongRecruits}</small>
                             </h1>
                             <ol class="breadcrumb">
                                 <li class="active">
-                                    <i class="fa fa-dashboard"></i> Kontrollpanel
+                                    <i class="fa fa-dashboard"></i> #{messages.ControlpanelTitle}
                                 </li>
                             </ol>
                         </div>
@@ -133,7 +133,7 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Kontaktuppgifter</h3>
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> #{messages.ContactInfoTitle}</h3>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -150,43 +150,43 @@
                                                              var="applicants" 
                                                              value="#{searchApplicantManager.applicants}" 
                                                              widgetVar="applicantsTable"
-                                                             emptyMessage="Hittade inget..." 
+                                                             emptyMessage="#{messages.FoundNothing}" 
                                                              filteredValue="#{searchApplicantManager.filteredApplicants}">
 
                                                     <f:facet name="header">
                                                         <p:outputPanel>
-                                                            <h:outputText value="Sök rekryt:" />
+                                                            <h:outputText value="#{messages.SearchRecruits}" />
                                                             <p:inputText id="globalFilter" 
                                                                          onkeyup="PF('applicantsTable').filter()" 
                                                                          style="width:150px" 
-                                                                         placeholder="Ange sökord"/>
+                                                                         placeholder="#{messages.SearchBy}"/>
                                                         </p:outputPanel>
                                                     </f:facet>
 
                                                     <p:column sortBy="#{applicants.name}"
                                                               filterBy="#{applicants.name}" 
-                                                              headerText="Förnamn" 
+                                                              headerText="#{messages.Firstname}" 
                                                               filterMatchMode="contains">
 
                                                         <h:outputText value="#{applicants.name}" />
                                                     </p:column>
                                                     <p:column filterBy="#{applicants.surname}" 
                                                               sortBy="#{applicants.surname}"
-                                                              headerText="Efternamn" 
+                                                              headerText="#{messages.Surname}" 
                                                               filterMatchMode="contains">
                                                         <h:outputText value="#{applicants.surname}" />
                                                     </p:column>
 
                                                     <p:column filterBy="#{applicants.email}" 
                                                               sortBy="#{applicants.email}"
-                                                              headerText="E-post" 
+                                                              headerText="#{messages.Email}" 
                                                               filterMatchMode="contains">
                                                         <h:outputText value="#{applicants.email}" />
                                                     </p:column>
 
                                                     <p:column filterBy="#{applicants.ssn}" 
                                                               sortBy="#{applicants.ssn}" 
-                                                              headerText="Personnummer" 
+                                                              headerText="#{messages.SSN}" 
                                                               filterMatchMode="contains">
                                                         <h:outputText value="#{applicants.ssn}" />
                                                     </p:column>
@@ -194,7 +194,7 @@
 
                                                     <p:column filterBy="#{applicants.competencesToString}" 
                                                               sortBy="#{applicants.competencesToString}"
-                                                              headerText="Kompetens" 
+                                                              headerText="#{messages.Competence}" 
                                                               filterMatchMode="contains">
                                                         <h:outputText value="#{applicants.competencesToString}" />
                                                     </p:column>

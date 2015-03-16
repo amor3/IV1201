@@ -19,158 +19,159 @@
 
         <!-- Custom Fonts -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-        
-        
-                <!-- Script Libs -->
+
+
+        <!-- Script Libs -->
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
 
     </head>
-                                
-    <h:body>
-        <ui:composition>
+    <f:view locale="#{languageManager.locale}">                           
+        <h:body>
+            <ui:composition>
 
 
-            <!-- Navigation -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Switcha</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" style="font-weight: bold; font-size: 20px;" href="#"><font color="#337ab7">BLÅA</font><font color="white"> LUND</font></a>
+                <!-- Navigation -->
+                <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span class="sr-only">Switcha</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" style="font-weight: bold; font-size: 20px;" href="#"><font color="#337ab7">BLÅA</font><font color="white"> LUND</font></a>
 
-                </div>
-                <!-- Top Menu Items -->
-                <ul class="nav navbar-right top-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-                        <ul class="dropdown-menu message-dropdown">
-                            <li class="message-preview">
-                                <a href="#">
-                                    <div class="media">
-                                        <span class="pull-left">
-                                            <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                        </span>
-                                        <div class="media-body">
-                                            <h5 class="media-heading"><strong>André More</strong>
-                                            </h5>
-                                            <p class="small text-muted"><i class="fa fa-clock-o"></i> Igår kl 14:32</p>
-                                            <p>Varmt välkomna till denna sida!</p>
+                    </div>
+                    <!-- Top Menu Items -->
+                    <ul class="nav navbar-right top-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu message-dropdown">
+                                <li class="message-preview">
+                                    <a href="#">
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="http://placehold.it/50x50" alt=""/>
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong>André More</strong>
+                                                </h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Igår kl 14:32</p>
+                                                <p>Varmt välkomna till denna sida!</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="message-footer">
-                                <a href="#">Läs alla nya meddelanden</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                        <ul class="dropdown-menu alert-dropdown">
-                            <li>
-                                <a href="#">Viktigt <span class="label label-default">Alert Badge</span></a>
-                            </li>
-                            <li>
-                                <a href="#">God jul <span class="label label-primary">Alert Badge</span></a>
-                            </li>
-                            <li>
-                                <a href="#">Test <span class="label label-success">Alert Badge</span></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">Visa allal</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> #{applicantManager.firstname} #{applicantManager.lastname} <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/Instrukt/faces/user/edit_profile.xhtml"><i class="fa fa-fw fa-user"></i> Min profil</a>
-                            </li>
-                            <li>
-                                <a href="/Instrukt/faces/user/edit_profile.xhtml"><i class="fa fa-fw fa-gear"></i> Inställningar</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <h:form>
-                                    <h:commandLink style="margin-left:20px;" action="#{applicantManager.loggout()}"><i class="fa fa-fw fa-power-off"></i> Logga ut</h:commandLink>
-                                </h:form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
-                        
-                        <li>
-                            <a href="/iv1201/faces/applicant/index.xhtml" style="color: white; font-weight: bold;">
-                                <i class="fa fa-fw fa-dashboard"></i>Startsidan</a>
+                                    </a>
+                                </li>
+                                <li class="message-footer">
+                                    <a href="#">Läs alla nya meddelanden</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="/iv1201/faces/applicant/profile.xhtml" style="color: white; font-weight: bold;">
-                                <i class="fa fa-fw fa-edit"></i>Min profil</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu alert-dropdown">
+                                <li>
+                                    <a href="#">Viktigt <span class="label label-default">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">God jul <span class="label label-primary">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Test <span class="label label-success">Alert Badge</span></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Visa allal</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="/iv1201/faces/applicant/availability.xhtml" style="color: white; font-weight: bold;">
-                                <i class="fa fa-fw fa-table"></i>Tillgänglighet</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> #{applicantManager.firstname} #{applicantManager.lastname} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Instrukt/faces/user/edit_profile.xhtml"><i class="fa fa-fw fa-user"></i>#{messages.MyprofileButton}</a>
+                                </li>
+                                <li>
+                                    <a href="/Instrukt/faces/user/edit_profile.xhtml"><i class="fa fa-fw fa-gear"></i>#{messages.Settings}</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <h:form>
+                                        <h:commandLink style="margin-left:20px;" action="#{applicantManager.loggout()}"><i class="fa fa-fw fa-power-off"></i> #{messages.Logout}</h:commandLink>
+                                    </h:form>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="/iv1201/faces/applicant/competences.xhtml" style="color: white; font-weight: bold;">
-                                <i class="fa fa-fw fa-table"></i>Kompetensområde</a>
-                        </li>
-
-                        
-                        
-                        <h:panelGroup rendered="true">
-                            <li>
-                                <a href="#" style="background-color: #d9534f; color: white; font-weight: bold;">
-                                    Rekryterare</a>
-                            </li>
-                            <li>
-                                <a href="/iv1201/faces/recruiter/search_user.xhtml" style="color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Sök ansökningar</a>
-                            </li>
-                            <li>
-                                <a href="/iv1201/faces/recruiter/accept_applicants.xhtml" style="color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Godkänn ansökningar</a>
-                            </li>
-                            <li>
-                                <a href="/iv1201/faces/recruiter/new_competence.xhtml" style="color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Ny kompetens</a>
-                            </li>
-                        </h:panelGroup>
-                        
-                        
-                        
-                        
-                        <h:panelGroup rendered="true">
-                            <li>
-                                <a href="#" 
-                                   style="background-color: #337ab7; color: white; font-weight: bold;">
-                                     Administratör</a>
-                            </li>
-                            <li>
-                                <a href="/iv1201/faces/admin/new_recruiter.xhtml"
-                                   style="color: white; font-weight: bold;">
-                                    <i class="fa fa-fw fa-gear"></i> Ny rekryterare</a>
-                            </li>
-
-                        </h:panelGroup>
-
                     </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
+                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                    <div class="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul class="nav navbar-nav side-nav">
 
-        </ui:composition>
-    </h:body> 
+                            <li>
+                                <a href="/iv1201/faces/applicant/index.xhtml" style="color: white; font-weight: bold;">
+                                    <i class="fa fa-fw fa-dashboard"></i>#{messages.home}</a>
+                            </li>
+                            <li>
+                                <a href="/iv1201/faces/applicant/profile.xhtml" style="color: white; font-weight: bold;">
+                                    <i class="fa fa-fw fa-edit"></i>#{messages.MyprofileButton}</a>
+                            </li>
+                            <li>
+                                <a href="/iv1201/faces/applicant/availability.xhtml" style="color: white; font-weight: bold;">
+                                    <i class="fa fa-fw fa-table"></i>#{messages.AvailablityButton}</a>
+                            </li>
+                            <li>
+                                <a href="/iv1201/faces/applicant/competences.xhtml" style="color: white; font-weight: bold;">
+                                    <i class="fa fa-fw fa-table"></i>#{messages.CompetencesButton}</a>
+                            </li>
+
+
+
+                            <h:panelGroup rendered="true">
+                                <li>
+                                    <a href="#" style="background-color: #d9534f; color: white; font-weight: bold;">
+                                        Rekryterare</a>
+                                </li>
+                                <li>
+                                    <a href="/iv1201/faces/recruiter/search_user.xhtml" style="color: white; font-weight: bold;">
+                                        <i class="fa fa-fw fa-gear"></i> #{messages.SearchApplications}</a>
+                                </li>
+                                <li>
+                                    <a href="/iv1201/faces/recruiter/accept_applicants.xhtml" style="color: white; font-weight: bold;">
+                                        <i class="fa fa-fw fa-gear"></i> #{messages.AcceptApplications}</a>
+                                </li>
+                                <li>
+                                    <a href="/iv1201/faces/recruiter/new_competence.xhtml" style="color: white; font-weight: bold;">
+                                        <i class="fa fa-fw fa-gear"></i> #{messages.NewCompetenceButton}</a>
+                                </li>
+                            </h:panelGroup>
+
+
+
+
+                            <h:panelGroup rendered="true">
+                                <li>
+                                    <a href="#" 
+                                       style="background-color: #337ab7; color: white; font-weight: bold;">
+                                        #{messages.AdminSection}</a>
+                                </li>
+                                <li>
+                                    <a href="/iv1201/faces/admin/new_recruiter.xhtml"
+                                       style="color: white; font-weight: bold;">
+                                        <i class="fa fa-fw fa-gear"></i> #{messages.NewRecruiterButton}</a>
+                                </li>
+
+                            </h:panelGroup>
+
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+
+            </ui:composition>
+        </h:body> 
+    </f:view>
 </html>
