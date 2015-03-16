@@ -6,13 +6,10 @@
 
 package se.kth.controller;
 
-import java.util.Date;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import se.kth.integration.CompetenceProfileDTO;
 import se.kth.integration.DuplicateEntryException;
 import se.kth.integration.NullArgumentException;
 import se.kth.integration.PersonDAO;

@@ -76,7 +76,7 @@
                                     <label for="email">#{messages.EmailAddresss}</label>
                                     <h:inputText value="#{registrationManager.email}"
                                                  class="form-control" 
-                                                 a:placeholder="Email"
+                                                 a:placeholder="#{messages.Email}"
                                                  id="email" />
                                     <h:message id="message1" for="email" style="color:red"/>
 
@@ -85,14 +85,14 @@
                                     <label for="password">#{messages.losenord}</label>
                                     <h:inputSecret value="#{registrationManager.password}"
                                                    class="form-control" 
-                                                   a:placeholder="password"
+                                                   a:placeholder="#{messages.losenord}"
                                                    id="password" />
                                     <h:message id="message2" for="password" style="color:red"/>
                                 </div>
                                 <div class="form-group">
                                     <h:inputSecret value="#{registrationManager.repeatPassword}"
                                                    class="form-control"
-                                                   a:placeholder="Repeat password"
+                                                   a:placeholder="#{messages.RepeatPassword}"
                                                    id="repeatpassword" />
                                     <h:message id="message3" for="repeatpassword" style="color:red"/>
                                 </div>
