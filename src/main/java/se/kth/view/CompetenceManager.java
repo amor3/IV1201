@@ -44,7 +44,15 @@ public class CompetenceManager implements Serializable{
     
     public CompetenceManager() {
     }
-
+    
+    /**
+     * constructor that take two parameters 
+     * with competences in both English and 
+     * Swedish language 
+     * 
+     * @param competenceSV
+     * @param competenceEN 
+     */
     public CompetenceManager(String competenceSV, String competenceEN) {
         this.competenceSV = competenceSV;
         this.competenceEN = competenceEN;

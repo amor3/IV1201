@@ -35,13 +35,24 @@ public class DroppableCManager implements Serializable {
     public void init() {
         droppedCompetences = new ArrayList<>();
     }
-     
+     /**
+      * Drop a competence into the list
+      * of copetences for the user
+      * 
+      * @param ddEvent 
+      */
     public void onCompetenceDrop(DragDropEvent ddEvent) {
         String competence = ((String) ddEvent.getData());
         droppedCompetences.add(new CompetenceProfileDTO(competence,BigDecimal.ONE));
         competenceManager.getCompetences().remove(competence);
     }
-    
+    /**
+     * Take the competence name from the 
+     * main list, because the user added it
+     * to his list of competence.
+     * 
+     * @param comp 
+     */
     public void removeDroppedCompetence(String comp){
         droppedCompetences.remove(new CompetenceProfileDTO(comp,BigDecimal.ONE));
     }

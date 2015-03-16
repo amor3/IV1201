@@ -26,9 +26,11 @@ public class CompetenceController {
     private CompetenceDAO competenceDAO;
 
     /**
-     *
-     * @param lan specify the which language
-     * @return competences in specific language
+     * Get competences in the specified language
+     * (En or Sv)
+     * 
+     * @param lan specify which language
+     * @return list of competences in the specified language
      *
      */
     public List<CompetenceLangInterface> getComptences(String lan) {

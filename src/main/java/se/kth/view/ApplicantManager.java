@@ -46,7 +46,10 @@ public class ApplicantManager implements Serializable {
     @PostConstruct
     public void init() {
     }
-
+    
+    /**
+     * save new user profile 
+     */
     public void saveUserProfile() {
         boolean status = false;
         try {
@@ -60,7 +63,9 @@ public class ApplicantManager implements Serializable {
             addMessage("Error", "Could not save profile");
         }
     }
-
+   /**
+    * Save user's credential 
+    */
     public void saveUserCredentials() {
         boolean status = false;
         try {
@@ -75,7 +80,11 @@ public class ApplicantManager implements Serializable {
             addMessage("Error", "Could not update credentials, check your passwords.");
         }
     }
-
+    /**
+     * logout a user
+     * 
+     * @return true if logout is succeeded
+     */
     public String loggout() {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
@@ -91,7 +100,12 @@ public class ApplicantManager implements Serializable {
             return "/index?faces-redirect=true";
         }
     }
-
+    /**
+     * Add Messages 
+     * 
+     * @param subject
+     * @param message 
+     */
     public void addMessage(String subject, String message) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(subject, message));

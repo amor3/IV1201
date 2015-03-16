@@ -51,6 +51,7 @@ public class RecruiterController {
     
     /**
      * removes a competence
+     * 
      * @param comp the competence to be removed
      * @throws DoesNotExistException
      * @throws NullArgumentException 
@@ -59,9 +60,11 @@ public class RecruiterController {
         competenceDAO.removeCompetence(comp);
     }
     /**
-     *
+     * Get all competences registered
+     * in the system.
+     * 
      * @param lan  specify the which language
-     * @return competences in specific language
+     * @return list of competences in specific language
      * 
      */
     public List<CompetenceLangInterface> getCompetences(String lan) {
@@ -70,7 +73,12 @@ public class RecruiterController {
         }
       return null;  
     }
-
+    /**
+     * Get the Registered Applicants 
+     * in the system.
+     * 
+     * @return list of Applicants
+     */
     public List<PersonInterface> getApplicants(){
         return personDAO.getAllPersons("APPLICANTS");
     }
